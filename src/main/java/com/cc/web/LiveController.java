@@ -28,8 +28,84 @@ public class LiveController {
 	private String  lineSeparator = System.getProperty("line.separator", "/n"); 
 	private int  lineSeparatorlen = lineSeparator.length(); 
 	
+	
+	
 	/**
-	 * 直播串
+	 * 方法1 
+	 * 1. 剪辑串   （与3联合使用）
+	 * 
+	 * 生成 m3u8 串 
+	 * 	http://127.0.0.1:8080/live/TJ2-800-vedioclip.m3u8?timelength=60&timestamp=1462331693523
+	 * 
+	 *  需要截取的时间戳  timestamp
+	 *  需要截取的时长      timelength  X秒 
+	 *  
+	 *  @param 
+	 *  	timestamp 时间戳 形如 1461918177000   -- 通过 test 中的com.cc.testTimestampe生成
+	 *  	tiemlength 时长 精确到秒
+	 * 
+	 * */
+
+	@RequestMapping("/TJ2-800-vedioclip.m3u8")
+	public String 	productVedioClip(Map<String, Object> model, HttpServletRequest request) {	 
+		String timestamp = request.getParameter("timestamp") ;		
+		Long timestampl = DataConvertTools.TimestampStringToTimestampLong(timestamp) ; //精确到秒
+		Integer iii=timestampl.intValue()/10;
+		iii=iii*10;
+		System.out.println("iii:"+iii);
+		Long iiil = iii.longValue();
+		Long cha = 0L ;
+		if(iiil<= timestampl){
+			cha =timestampl-iiil;
+		}
+		Long tspojo_tstimesecond_start=0L; //找到 间隔的区间。startttime
+		Long tspojo_tstimesecond_end=0L; //找到 间隔的区间。endttime
+		System.out.println("cha=="+cha);
+		if (cha >=ts_per_time.longValue()){
+			tspojo_tstimesecond_start=iiil+ts_per_time.longValue();
+		}else{
+			tspojo_tstimesecond_start=iiil;
+		}
+		//获取时间间隔
+		String timelength =  request.getParameter("timelength") ;
+		Integer  tiemlengthi = Integer.parseInt(timelength);		
+		int tscount = tiemlengthi/ts_per_time;		 
+		tspojo_tstimesecond_end = tspojo_tstimesecond_start+ tiemlengthi;	
+		System.out.println(tspojo_tstimesecond_start + "------------"+tspojo_tstimesecond_end);
+		List<Tspojo> tspojos= tspojoDao.findByTstimesecondBetweenOrderByIdAsc(tspojo_tstimesecond_start, tspojo_tstimesecond_end);
+		Iterator<Tspojo> tspojosi = tspojos.iterator();
+		String pageReturnStr4 = "" ;		 
+		String pageReturnStr4_part2 = "" ;
+		//依照 test1vs 的拼串方式
+		pageReturnStr4= "#EXTM3U"+lineSeparator
+				+"#EXT-X-VERSION:3"+lineSeparator
+				+"#EXT-X-TARGETDURATION:7"+lineSeparator
+				+"#EXT-X-MEDIA-SEQUENCE:0"+lineSeparator;  
+
+		while(tspojosi.hasNext()){		
+			Tspojo t = tspojosi.next();
+			pageReturnStr4_part2=pageReturnStr4_part2+"#EXTINF:5,"+lineSeparator
+					+"/live/live2/TJ2/800/"+t.getName()+lineSeparator;			
+		}
+		
+		System.out.println("http://127.0.0.1:8080/live/TJ2-800-vedioclip.m3u8?timelength="+timelength+"&timestamp="+timestamp);
+		pageReturnStr4= pageReturnStr4+pageReturnStr4_part2
+				+"#EXT-X-DISCONTINUITY"+lineSeparator
+				+"#EXT-X-ENDLIST"+lineSeparator;	
+		//pageReturnStr= pageReturnStr.substring(0, pageReturnStr.length()-lineSeparatorlen);
+		System.out.println("--------------------------------------");
+		System.out.println(pageReturnStr4);
+		System.out.println("--------------------------------------");
+		model.put("pageReturnStr", pageReturnStr4);		
+		
+		return "TJ2800vedioclip";
+	}
+	
+	
+	
+		
+	/**
+	 * 2. 直播串    (存在问题)
 	 * 
 	 * 生成 m3u8 串 
 	 * 	http://127.0.0.1:8080/live/TJ2-800-node1.m3u8?timelength=30&timestamp=1462331549523
@@ -93,9 +169,7 @@ public class LiveController {
 		 * #EXTINF:5,
 		 * /live/live2/TJ2/800/TJ2-800-node1_20160429104931_1460075663.ts 
 		 * 
-		 * */
-
-		
+		 * */		
 		
 		
 		int i = 0 ;
@@ -129,7 +203,10 @@ public class LiveController {
 	
 	
 	/**
-	 * http://127.0.0.1:8080/live/INDEX.m3u8?timelength=30&timestamp=1462331549523
+	 * 3. 剪辑外套串
+	 * 剪辑后的外套串  与方法1( productVedioClip )一起用 ，套在1的外面
+	 * 
+	 * http://127.0.0.1:8080/live/INDEX.m3u8?timelength=30&timestamp=1462331693523
 	 * 
 	 * <video id="player" controls="" webkit-playsinline="" autoplay="" 
 	 *  type="m3u8" poster="http://eshare.vod.otvcloud.com/otv/nyz/share/channel01/6/5a/a/logo.jpg?start=1461737498&amp;len=30" 
@@ -153,14 +230,18 @@ public class LiveController {
 		String timestamp = request.getParameter("timestamp") ;
 		String timelength = request.getParameter("timelength") ;
 		String pageReturnStr2= "#EXTM3U"+lineSeparator+"#EXT-X-STREAM-INF:PROGRAM-ID=1,BANDWIDTH=409600"+lineSeparator
-							+"Test1.m3u8?timelength="+timelength+"&timestamp="+timestamp+lineSeparator+
+							+"TJ2-800-vedioclip.m3u8?timelength="+timelength+"&timestamp="+timestamp+lineSeparator+
 							"#EXT-X-ENDLIST"+lineSeparator;
+		//String pageReturnStr2= "#EXTM3U"+lineSeparator+"#EXT-X-STREAM-INF:PROGRAM-ID=1,BANDWIDTH=409600"+lineSeparator
+		//		+"Test1.m3u8?timelength="+timelength+"&timestamp="+timestamp+lineSeparator+
+		//		"#EXT-X-ENDLIST"+lineSeparator;
 		model.put("pageReturnStr", pageReturnStr2);
 		return "indexCutVedio";
 	}
 	
 	
 	/**
+	 * 剪辑测试串
 	 * http://127.0.0.1:8080/live/Test1.m3u8
 	 * 
 	 * 视频截取后的测试片断，可以完全播放 OK

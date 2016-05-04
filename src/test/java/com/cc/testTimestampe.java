@@ -8,8 +8,8 @@ import java.util.Calendar;
 
 public class testTimestampe {
 
-	public static void main(String[] args) {		
-		String s = "20160504111228";
+	public static void main(String[] args) {	
+		String s = "20160504111453";
 		long timestampslong =  DataStringToTimestampLong(s) ;
 		System.out.println(s+"-----》"+timestampslong+" (精确到秒)");
 		//1461918177000   1461918177
