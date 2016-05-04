@@ -14,6 +14,6 @@ spring boot 快速构建代码网站 http://start.spring.io/ （spring boot 代�
           随后实现，自动生成m3u8的工作<br>
           
 ###版本0.11：
-----视频下载后存放位置 \vediocut\vediocut\src\main\resources\static\live\live2\TJ2\800\TJ2-800-node1_20160504102158_1460161734.ts
+----视频下载后存放位置 \vediocut\vediocut\src\main\resources\static\live\live2\TJ2\800\TJ2-800-node1_20160504102158_1460161734.ts<br>
 ----视频通过 com.cc.web.LiveController test1vs() 生成截取播放串。经vlc测试可以正常播放。
 
