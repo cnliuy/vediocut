@@ -220,7 +220,9 @@ public class Remotefiletools {
         		tspojo2.setName(tsname);
         		tspojo2.setPindaostr(pindaoString);
         		tspojo2.setTssequence(seqString);
-        		tspojo2.setTstimestamp(dataString);
+        		tspojo2.setTstimestamp(dataString);        		
+        		Long tstimesecond = DataConvertTools.DataStringToTimestampLong(dataString);
+        		tspojo2.setTstimesecond(tstimesecond); //不成功的话，转换为0L,也存入数据库。       
         		tspojoDao.save(tspojo2);  //将数据保存到数据库       
         		System.out.println("============ 保存数据库成功  tsname:"+tsname); 
             }else{

@@ -7,7 +7,7 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 @SpringBootApplication
-@EnableScheduling
+//@EnableScheduling
 public class VediocutApplication  extends WebMvcConfigurerAdapter {
 
 	public static void main(String[] args) {

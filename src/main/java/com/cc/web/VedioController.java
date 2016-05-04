@@ -16,6 +16,7 @@ public class VedioController {
 	
 	
 	/**
+	 * Test
 	 * liveUrl 直播地址
 	 * l_name  直播地址后续参名1
 	 * l_val   直播地址后续参数值1

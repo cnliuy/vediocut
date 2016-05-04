@@ -25,7 +25,7 @@ public class Tspojo implements Serializable{
 	
 	private String tstimestamp;
 	
-	
+	private Long tstimesecond;//精确到秒
 
 	public String getTstimestamp() {
 		return tstimestamp;
@@ -67,6 +67,15 @@ public class Tspojo implements Serializable{
 		this.pindaostr = pindaostr;
 	}
 
+	public Long getTstimesecond() {
+		return tstimesecond;
+	}
+
+	public void setTstimesecond(Long tstimesecond) {
+		this.tstimesecond = tstimesecond;
+	}
+
+ 
  
 	
 	

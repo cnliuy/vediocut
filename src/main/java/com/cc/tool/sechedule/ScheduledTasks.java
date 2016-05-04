@@ -46,7 +46,7 @@ public class ScheduledTasks {
 
         try {  
         	//下载 m3u8文件，并下载相应视频，存入数据库。重复的ts丢掉，不下载，不存数据库。
-        	remotefiletools.getM3u8_DownFiles( url,srcurl,destFilePath );        	
+        	remotefiletools.getM3u8_DownFiles(url,srcurl,destFilePath);        	
         } catch (ParseException e) {  
             e.printStackTrace();  
         } catch (IOException e) {  
