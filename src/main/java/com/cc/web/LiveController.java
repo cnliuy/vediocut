@@ -16,7 +16,10 @@ import com.cc.entity.Tspojo;
 import com.cc.tools.DataConvertTools;
 
 
-
+/**
+ * 视频截取 播放 类
+ * 
+ * */
 @Controller
 @RequestMapping("/live")
 public class LiveController {
