@@ -12,10 +12,13 @@ spring boot 快速构建代码网站 http://start.spring.io/ （spring boot 代�
           并将对应数据存入数据库。已经下载的数据，会先检索数据库，不做重复下载工<br>
           作。<br>   
           随后实现，自动生成m3u8的工作<br>
+          在com.cc.VediocutApplicationde下 打开@EnableScheduling注释 开始ts片段的下载操作
           
 ###版本0.11：
 ----视频下载后存放位置 \vediocut\vediocut\src\main\resources\static\live\live2\TJ2\800\TJ2-800-node1_20160504102158_1460161734.ts<br>
 ----视频通过 com.cc.web.LiveController test1vs() 生成截取播放串。经vlc测试可以正常播放。<br>
+----视频通过  http://127.0.0.1:8080/live/TJ2-800-vedioclip.m3u8?timelength=60&timestamp=1462331693523 播放 <br>
+----src/test/java下的  com.cc.testTimestampe 类  根据时分秒 生成  timestampe
 
 ----创建war包 ，当项目中存在多个带 main() 方法的类，打包war时，会出现问题。<br>
 ----" Your existing archive will be enhanced by Spring Boot during the package phase. The main class that you want<br>

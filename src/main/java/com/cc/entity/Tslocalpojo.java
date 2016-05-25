@@ -8,10 +8,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-
+/**
+ * 本地存储ts的 数据信息
+ * 
+ * */
 @Entity
-@Table(name = "tspojo")
-public class Tspojo implements Serializable{
+@Table(name = "tslocalpojo")
+public class Tslocalpojo implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;  

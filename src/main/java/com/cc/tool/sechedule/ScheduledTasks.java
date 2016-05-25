@@ -8,7 +8,10 @@ import org.apache.http.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
+
+import com.cc.Someconstant;
 import com.cc.tools.Remotefiletools;
+import com.cc.tools2.M3u8DownloadC;
 
 @Component
 public class ScheduledTasks {
@@ -16,13 +19,37 @@ public class ScheduledTasks {
  
 	@Autowired
 	private Remotefiletools remotefiletools;
-	
+	@Autowired
+	private M3u8DownloadC m3u8DownloadC;
+
+    
+	/**
+	 * 每隔 16秒 ，取一次m3u8 视频，并存入数据库。
+	 * 
+	 * */
+    @Scheduled(fixedRate = 16000)
+    public void downm3u8save2db() {
+    	
+     	String url ="http://43.224.208.195/live/coship,TWSX1422589417980523.m3u8?fmt=x264_0k_mpegts";
+    	String srcurl ="http://43.224.208.195/";
+    	
+    	try {  
+        	//下载 m3u8文件，并下载相应视频，存入数据库。重复的ts丢掉，不下载，不存数据库。 			
+			m3u8DownloadC.m3u8download(url,srcurl,Someconstant.tsname_length);	   	
+		} catch (java.text.ParseException e) {		
+			e.printStackTrace();
+		}       
+    	
+    }
+    
+    
+    
 	/**
 	 * 每隔 20秒 ，取一次m3u8 视频，并下载到指定文件夹 同属存入数据库。
 	 * 
 	 * */
-    @Scheduled(fixedRate = 20000)
-    public void reportCurrentTime() {
+    //@Scheduled(fixedRate = 20000)
+    public void downm3u8anddownloadts() {
     	//Tspojo t = new Tspojo();
     	//t.setName("1231232");
     	
@@ -43,7 +70,6 @@ public class ScheduledTasks {
     	}
     	System.out.println("目录path："+destFilePath);
 
-
         try {  
         	//下载 m3u8文件，并下载相应视频，存入数据库。重复的ts丢掉，不下载，不存数据库。
         	remotefiletools.getM3u8_DownFiles(url,srcurl,destFilePath);        	
@@ -57,4 +83,8 @@ public class ScheduledTasks {
 		System.out.println("花费时间 ="+(d/1000000)+"毫秒");   	
         System.out.println("你好 The time is now " + dateFormat.format(new Date()));
     }
+    
+
+    
+
 }

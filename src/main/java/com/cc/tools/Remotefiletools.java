@@ -164,7 +164,7 @@ public class Remotefiletools {
      *    重复的ts丢掉，不下载，不存数据库。
      *    
      * @return   返回值 示例 String    只是文件名集合  TJ2-800-node1_20160429160206_1460079414.ts
-     * @param url  
+     * @param url  (url ="http://43.224.208.195/live/coship,TWSX1422589417980523.m3u8?fmt=x264_0k_mpegts";)
      * @throws ClientProtocolException 
      * @throws IOException 
      */  

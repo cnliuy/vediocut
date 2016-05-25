@@ -9,9 +9,9 @@ import java.util.Calendar;
 public class testTimestampe {
 
 	public static void main(String[] args) {	
-		String s = "20160504111453";
+		String s = "20160520150953";
 		long timestampslong =  DataStringToTimestampLong(s) ;
-		System.out.println(s+"-----》"+timestampslong+" (精确到秒)");
+		System.out.println(s+"-----》"+timestampslong+"521 (精确到秒)");
 		//1461918177000   1461918177
 		//1461918176000   1461918176
 		

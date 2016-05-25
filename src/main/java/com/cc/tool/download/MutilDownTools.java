@@ -10,7 +10,7 @@ public class MutilDownTools {
 	 * 
 	 * 单个文件的 多线程下载。  在用  --- using
 	 * 
-	 * http://43.224.208.195/live/live2/TJ2/800/TJ2-800-node1_20160427113618_1460041664.ts 
+	 * srcurl  : http://43.224.208.195/live/live2/TJ2/800/TJ2-800-node1_20160427113618_1460041664.ts 
 	 * 
 	 * */
 	
@@ -24,7 +24,12 @@ public class MutilDownTools {
 					// 创建一个URL对象
 					URL url = new URL(srcurl);
 					// 以此URL对象打开第一个输入流
-					isArr[0] = url.openStream();
+					try {
+						isArr[0] = url.openStream();
+					} catch (Exception e) {
+						OUT_FILE_NAME ="";
+						e.printStackTrace();
+					}
 					long fileLen = getFileLength(url);
 					System.out.println("网络资源的大小" + fileLen);
 					//以输出文件名创建第一个RandomAccessFile输出流
@@ -61,7 +66,9 @@ public class MutilDownTools {
 						}
 					}
 				} catch (Exception ex) {
+					OUT_FILE_NAME ="";
 					ex.printStackTrace();
+					
 				}
 				
 				return  OUT_FILE_NAME  ;
@@ -73,9 +80,11 @@ public class MutilDownTools {
 		long length = 0;
 		// 打开该URL对应的URLConnection
 		URLConnection con = url.openConnection();
+		con.setConnectTimeout(7600);  
+		con.setReadTimeout(7600);  
 		// 获取连接URL资源的长度
 		long size = con.getContentLength();
-		length = size;
+		length = size;		
 		return length;
 	}
 }
