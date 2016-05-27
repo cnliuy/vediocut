@@ -17,6 +17,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.cc.Someconstant;
+import com.cc.dao.TslocalstatuspojoDao;
 import com.cc.dao.TspojoDao;
 import com.cc.entity.Tspojo;
 import com.cc.tools.DataConvertTools;
@@ -36,6 +37,10 @@ public class Live2Controller {
 	private TspojoDao tspojoDao;
 	
 	@Autowired
+	private TslocalstatuspojoDao tslocalstatuspojoDao;
+	
+	
+	@Autowired
 	private M3u8Download m3u8Download; //不能新建 ，new出来的，其中的注入会不好使
 	
 	//@Autowired  //多线程的话 此处不能注入 会报错 
@@ -50,6 +55,8 @@ public class Live2Controller {
 	private String srcurl="http://43.224.208.195/";
 	
 	/**
+	 * 入口
+	 * 
 	 * 方法1 
 	 *  异步下载ts切片
 	 * 
@@ -81,6 +88,7 @@ http://127.0.0.1:8080/livex/liveclip?timelength=60&liveUrl=http%3A%2F%2F43.224.2
 		Long nowtime =  System.currentTimeMillis()/1000 ;//精确到秒
 		model.put("vediotimestamp",nowtime.toString());
 		String liveUrL = request.getParameter("liveUrl") ;//URI可以自动转为 URL型的
+		model.put("doloadstatus","http://127.0.0.1:8080/rest/downloadbeok?vediotimestamp="+nowtime.toString());
 		
 		//System.out.println("liveUrI:"+liveUrI);//liveUrI:http://43.224.208.195/live/coship,TWSX1422595673115099.m3u8?fmt=x264_0k_mpegts
 		//String liveUrL = URItool.URI2URL(liveUrI);
@@ -94,7 +102,7 @@ http://127.0.0.1:8080/livex/liveclip?timelength=60&liveUrl=http%3A%2F%2F43.224.2
 	            public String call() throws Exception {  
 	            	String uuids = UUID.randomUUID().toString();	            	
 	            	//Thread.sleep(1000L);	            	
-	            	DownloadThread dt = new DownloadThread(liveUrL, srcurl, tsname_length, tiemlengthi,uuids,tspojoDao);//new出来的 里面的对象不能被注入进来
+	            	DownloadThread dt = new DownloadThread(liveUrL, srcurl, tsname_length, tiemlengthi,uuids, nowtime,tspojoDao, tslocalstatuspojoDao);//new出来的 里面的对象不能被注入进来
 	            	dt.start();	            	
 //	            	downloadThread.setM3u8url(liveUrL);
 //	            	downloadThread.setSrcurl(srcurl);
@@ -103,7 +111,7 @@ http://127.0.0.1:8080/livex/liveclip?timelength=60&liveUrl=http%3A%2F%2F43.224.2
 //	            	downloadThread.setUuids(uuids);
 //	            	downloadThread.start();
 	        		//m.m3u8download(liveUrL,srcurl,tsname_length,tiemlengthi,uuids);
-	                //Thread.sleep(3000L); 	  
+	                //Thread.sleep(3000L);	            	
 	                return "inputtitle";  
 	            }  
 	        };  
@@ -205,8 +213,9 @@ http://127.0.0.1:8080/livex/liveclip?timelength=60&liveUrl=http%3A%2F%2F43.224.2
 	
 	
 	/**
-	 * 方法2 
-	 * 1. 同步下载
+	 * 未用   体验不好
+	 *  
+	 * 1. 同步下载   单线程下载
 	 * 
 	 * 生成 m3u8 串 
 http://127.0.0.1:8080/livex/liveclip2?liveUrl=http%3A%2F%2F43.224.208.195%2Flive%2Fcoship%2CTWSX1422595673115099.m3u8%3Ffmt%3Dx264_0k_mpegts&timelength=60
@@ -228,14 +237,14 @@ http://127.0.0.1:8080/livex/liveclip2?liveUrl=http%3A%2F%2F43.224.208.195%2Flive
 		String timelength =  request.getParameter("timelength") ;
 		Integer  tiemlengthi = Integer.parseInt(timelength);	
 		String liveUrL = request.getParameter("liveUrl") ;//URI可以自动转为 URL型的
-		
+		Long nowtime =  System.currentTimeMillis()/1000 ;//精确到秒
 		if("".equals(liveUrL) ){
 			//地址转化出现问题  异常
 			return null;  
 		}else{
 			String uuids = UUID.randomUUID().toString();			
 			try {
-				m3u8Download.m3u8download(liveUrL,srcurl,tsname_length,tiemlengthi,uuids,tspojoDao);
+				m3u8Download.m3u8download(liveUrL,srcurl,tsname_length,tiemlengthi,uuids,nowtime,tspojoDao,tslocalstatuspojoDao);
 			} catch (ParseException e) {				
 				e.printStackTrace();
 			}
