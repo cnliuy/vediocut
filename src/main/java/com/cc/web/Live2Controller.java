@@ -38,14 +38,17 @@ import com.cc.tools.URItool;
 http://127.0.0.1:8080/livex/liveclip?timelength=60&liveUrl=http%3A%2F%2F43.224.208.195%2Flive%2Fcoship%2CTWSX1422589417980523.m3u8%3Ffmt%3Dx264_0k_mpegts
 
 http://10.0.0.35:8080/livex/liveclip?timelength=60&liveUrl=http%3A%2F%2F43.224.208.195%2Flive%2Fcoship%2CTWSX1422589417980523.m3u8%3Ffmt%3Dx264_0k_mpegts
-l
+
+
+http://10.0.0.35:80/livex/liveclip?timelength=60&liveUrl=http%3A%2F%2F43.224.208.195%2Flive%2Fcoship%2CTWSX1422589417980523.m3u8%3Ffmt%3Dx264_0k_mpegts
+
  * 
  * */
 @Controller
 @RequestMapping("/livex")
 public class Live2Controller {
 	private  String ipaddress = "10.0.0.35";
-	private  String ipport = "8080";
+	private  String ipport = "80";
 	
 	@Autowired
 	private TspojoDao tspojoDao;
