@@ -26,13 +26,25 @@ import com.cc.tools.M3u8Download;
 import com.cc.tools.URItool;
 
 
+
+
+
 /**
  * 视频截取 播放 类2  新
+ * 
+ * 
+http://127.0.0.1:8080/livex/liveclip?timelength=60&liveUrl=http%3A%2F%2F43.224.208.195%2Flive%2Fcoship%2CTWSX1422589417980523.m3u8%3Ffmt%3Dx264_0k_mpegts
+
+http://10.0.0.35:8080/livex/liveclip?timelength=60&liveUrl=http%3A%2F%2F43.224.208.195%2Flive%2Fcoship%2CTWSX1422589417980523.m3u8%3Ffmt%3Dx264_0k_mpegts
+
  * 
  * */
 @Controller
 @RequestMapping("/livex")
 public class Live2Controller {
+	private  String ipaddress = "10.0.0.35";
+	private  String ipport = "8080";
+	
 	@Autowired
 	private TspojoDao tspojoDao;
 	
@@ -88,7 +100,8 @@ http://127.0.0.1:8080/livex/liveclip?timelength=60&liveUrl=http%3A%2F%2F43.224.2
 		Long nowtime =  System.currentTimeMillis()/1000 ;//精确到秒
 		model.put("vediotimestamp",nowtime.toString());
 		String liveUrL = request.getParameter("liveUrl") ;//URI可以自动转为 URL型的
-		model.put("doloadstatus","http://127.0.0.1:8080/rest/downloadbeok?vediotimestamp="+nowtime.toString());
+		
+		model.put("doloadstatus","http://"+ipaddress+":"+ipport+"/rest/downloadbeok?vediotimestamp="+nowtime.toString());
 		
 		//System.out.println("liveUrI:"+liveUrI);//liveUrI:http://43.224.208.195/live/coship,TWSX1422595673115099.m3u8?fmt=x264_0k_mpegts
 		//String liveUrL = URItool.URI2URL(liveUrI);
@@ -125,7 +138,7 @@ http://127.0.0.1:8080/livex/liveclip?timelength=60&liveUrl=http%3A%2F%2F43.224.2
 		String vediotimestamp =  request.getParameter("vediotimestamp") ;
 		String title = request.getParameter("title") ;
 		System.out.println("vediotimestamp:"+vediotimestamp+"   -----     title:"+title);
-		model.put("m3u8str","http://127.0.0.1:8080/livex/TJ2-800-vedioclip.m3u8?timelength=60&vediotimestamp="+vediotimestamp);
+		model.put("m3u8str","http://"+ipaddress+":"+ipport+"/livex/TJ2-800-vedioclip.m3u8?timelength=60&vediotimestamp="+vediotimestamp);
 		model.put("vediotitle",title);
 		return "playvedio";  
 	}
@@ -192,7 +205,7 @@ http://127.0.0.1:8080/livex/liveclip?timelength=60&liveUrl=http%3A%2F%2F43.224.2
 					+"/live/live2/TJ2/800/"+t.getName()+lineSeparator;			
 		}
 		
-		System.out.println("http://127.0.0.1:8080/live/TJ2-800-vedioclip.m3u8?timelength="+timelength+"&timestamp="+timestamp);
+		System.out.println("http://"+ipaddress+":"+ipport+"/live/TJ2-800-vedioclip.m3u8?timelength="+timelength+"&timestamp="+timestamp);
 		pageReturnStr4= pageReturnStr4+pageReturnStr4_part2
 				+"#EXT-X-DISCONTINUITY"+lineSeparator
 				+"#EXT-X-ENDLIST"+lineSeparator;	
@@ -339,7 +352,7 @@ http://127.0.0.1:8080/livex/liveclip2?liveUrl=http%3A%2F%2F43.224.208.195%2Flive
 			i++;
 		}
 		
-		System.out.println("http://127.0.0.1:8080/live/TJ2-800-node1.m3u8?timelength="+timelength+"&timestamp="+timestamp);
+		System.out.println("http://"+ipaddress+":"+ipport+"/live/TJ2-800-node1.m3u8?timelength="+timelength+"&timestamp="+timestamp);
 		pageReturnStr= pageReturnStr+pageReturnStr_part1+pageReturnStr_part2;	
 		//pageReturnStr= pageReturnStr.substring(0, pageReturnStr.length()-lineSeparatorlen);
 		System.out.println("--------------------------------------");

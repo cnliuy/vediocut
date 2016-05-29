@@ -10,8 +10,9 @@
  
 	 
 	${vediotitle}:
-	<br>${m3u8str}<br><br>
- 	<video id="player" controls="" webkit-playsinline="" 
+	<br>
+	<!--${m3u8str}  --><br><br>
+ 	<video id="player"  webkit-playsinline="" 
  		autoplay="" type="m3u8" 
  		poster="${m3u8str}" 
  		src="${m3u8str}">
