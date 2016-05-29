@@ -19,7 +19,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.cc.Someconstant;
 import com.cc.dao.TslocalstatuspojoDao;
 import com.cc.dao.TspojoDao;
+import com.cc.dao.VediocutpojoDao;
 import com.cc.entity.Tspojo;
+import com.cc.entity.Vediocutpojo;
 import com.cc.tools.DataConvertTools;
 import com.cc.tools.DownloadThread;
 import com.cc.tools.M3u8Download;
@@ -36,7 +38,7 @@ import com.cc.tools.URItool;
 http://127.0.0.1:8080/livex/liveclip?timelength=60&liveUrl=http%3A%2F%2F43.224.208.195%2Flive%2Fcoship%2CTWSX1422589417980523.m3u8%3Ffmt%3Dx264_0k_mpegts
 
 http://10.0.0.35:8080/livex/liveclip?timelength=60&liveUrl=http%3A%2F%2F43.224.208.195%2Flive%2Fcoship%2CTWSX1422589417980523.m3u8%3Ffmt%3Dx264_0k_mpegts
-
+l
  * 
  * */
 @Controller
@@ -47,6 +49,9 @@ public class Live2Controller {
 	
 	@Autowired
 	private TspojoDao tspojoDao;
+	
+	@Autowired
+	private VediocutpojoDao vediocutpojoDao;
 	
 	@Autowired
 	private TslocalstatuspojoDao tslocalstatuspojoDao;
@@ -138,11 +143,31 @@ http://127.0.0.1:8080/livex/liveclip?timelength=60&liveUrl=http%3A%2F%2F43.224.2
 		String vediotimestamp =  request.getParameter("vediotimestamp") ;
 		String title = request.getParameter("title") ;
 		System.out.println("vediotimestamp:"+vediotimestamp+"   -----     title:"+title);
-		model.put("m3u8str","http://"+ipaddress+":"+ipport+"/livex/TJ2-800-vedioclip.m3u8?timelength=60&vediotimestamp="+vediotimestamp);
-		model.put("vediotitle",title);
-		return "playvedio";  
+		String m3u8str = "http://"+ipaddress+":"+ipport+"/livex/TJ2-800-vedioclip.m3u8?timelength=60&vediotimestamp="+vediotimestamp;
+		//model.put("m3u8str","http://"+ipaddress+":"+ipport+"/livex/TJ2-800-vedioclip.m3u8?timelength=60&vediotimestamp="+vediotimestamp);
+		//model.put("vediotitle",title);
+		
+		
+		Vediocutpojo  vp = new Vediocutpojo();
+		vp.setVediocuttitle(title);
+		vp.setVediocuturl(m3u8str);
+		UUID uuid = UUID.randomUUID();
+		String uuids= uuid.toString();
+		vp.setVediocutuuid(uuids);
+		vediocutpojoDao.save(vp);		
+		//return "playvedio";  
+		return "redirect:./jtplayvedio?uid="+uuids; 
 	}
 	
+	@RequestMapping("/jtplayvedio")
+	public  String jtplayvedio (Map<String, Object> model, HttpServletRequest request) {
+		System.out.println("tiaodao----------------------------");
+		String uid = request.getParameter("uid").trim() ;
+		Vediocutpojo vp = vediocutpojoDao.findByVediocutuuid(uid);
+		model.put("m3u8str",vp.getVediocuturl());
+		model.put("vediotitle",vp.getVediocuttitle());
+		return "playvedio"; 
+	}
 	
 	
 	/**
