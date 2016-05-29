@@ -4,16 +4,18 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
 <html lang="utf-8">
 
 <body>
  
 	 
-	视频:<br>${m3u8str}
-	  
-	<br>
- 
+	${vediotitle}:
+	<br>${m3u8str}<br><br>
+ 	<video id="player" controls="" webkit-playsinline="" 
+ 		autoplay="" type="m3u8" 
+ 		poster="${m3u8str}" 
+ 		src="${m3u8str}">
+ 	</video>
 </body>
 
 </html>

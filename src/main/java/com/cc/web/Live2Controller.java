@@ -126,7 +126,7 @@ http://127.0.0.1:8080/livex/liveclip?timelength=60&liveUrl=http%3A%2F%2F43.224.2
 		String title = request.getParameter("title") ;
 		System.out.println("vediotimestamp:"+vediotimestamp+"   -----     title:"+title);
 		model.put("m3u8str","http://127.0.0.1:8080/livex/TJ2-800-vedioclip.m3u8?timelength=60&vediotimestamp="+vediotimestamp);
-		
+		model.put("vediotitle",title);
 		return "playvedio";  
 	}
 	

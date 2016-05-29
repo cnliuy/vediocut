@@ -39,7 +39,8 @@
 							
 				           	if(downloadstat == 1){ 	
 				           		$("#p1").hide();
-				           		$("#vediocutbutton").hide();
+				           		//$("#vediocutbutton").hide();
+				           		$("#vediocutbutton").attr({"disabled":"disabled"});
 				           		$("#submitbutton").show();
 				        	    $("#p2").prepend("视频截取完成,您可以分享朋友圈了");
 				        	    clearInterval(ref2); //结束定时任务  			        	    
@@ -64,7 +65,7 @@
 	  <input type="hidden" name="vediotimestamp" value="${vediotimestamp}" />
       <input name="title" type="text"   />    
       <input id="vediocutbutton" name="vediocutbutton"  type="button"  value="截取视频" />     
-      <input id="submitbutton" name="submit"  type="submit"  value="提交分享" />  
+      <input id="submitbutton" name="submit"  type="submit"  value="生成分享页面分享" />  
 	</form>   
 	<br>
 	<div  id="div123"> 
