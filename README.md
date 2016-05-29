@@ -37,4 +37,6 @@ spring boot 快速构建代码网站 http://start.spring.io/ （spring boot 代�
     	<br>
     访问入口。
     
+    注意系统时间的同步问题，时间必须统一，才能正确截取视频。
+    
 	

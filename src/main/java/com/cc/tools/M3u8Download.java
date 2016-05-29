@@ -272,6 +272,14 @@ public class M3u8Download {
 					File.separator+"vediocut"+File.separator+"src"+File.separator+"main"+
 					File.separator+"webapp"+File.separator+"live"
 					+File.separator+"live2"+File.separator+"TJ2"+File.separator+"800"; 
+        	
+        	//---服务器的地址
+        	//---C:\Java\vediosrc_git\vediocut\src\main\webapp\live\live2\TJ2\800
+//        	destFilePath="C:"+File.separator+"Java"+File.separator+"vediosrc_git"+File.separator+"vediocut"
+//        			+File.separator+"src"+File.separator+"main"+
+//					File.separator+"webapp"+File.separator+"live"
+//					+File.separator+"live2"+File.separator+"TJ2"+File.separator+"800"; 
+        	
         	try {
         		if (!(new File(destFilePath).isDirectory())) {
         			new File(destFilePath).mkdir();
