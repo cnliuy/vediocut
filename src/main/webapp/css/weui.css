@@ -56,63 +56,63 @@ a {
 .weui_icon_circle:before {
   content: "\EA01";
 }
-/* '' */
+/* '顮�' */
 .weui_icon_download:before {
   content: "\EA02";
 }
-/* '' */
+/* '顮�' */
 .weui_icon_info:before {
   content: "\EA03";
 }
-/* '' */
+/* '顮�' */
 .weui_icon_safe_success:before {
   content: "\EA04";
 }
-/* '' */
+/* '顮�' */
 .weui_icon_safe_warn:before {
   content: "\EA05";
 }
-/* '' */
+/* '顮�' */
 .weui_icon_success:before {
   content: "\EA06";
 }
-/* '' */
+/* '顮�' */
 .weui_icon_success_circle:before {
   content: "\EA07";
 }
-/* '' */
+/* '顮�' */
 .weui_icon_success_no_circle:before {
   content: "\EA08";
 }
-/* '' */
+/* '顮�' */
 .weui_icon_waiting:before {
   content: "\EA09";
 }
-/* '' */
+/* '顮�' */
 .weui_icon_waiting_circle:before {
   content: "\EA0A";
 }
-/* '' */
+/* '顮�' */
 .weui_icon_warn:before {
   content: "\EA0B";
 }
-/* '' */
+/* '顮�' */
 .weui_icon_info_circle:before {
   content: "\EA0C";
 }
-/* '' */
+/* '顮�' */
 .weui_icon_cancel:before {
   content: "\EA0D";
 }
-/* '' */
+/* '顮�' */
 .weui_icon_search:before {
   content: "\EA0E";
 }
-/* '' */
+/* '顮�' */
 .weui_icon_clear:before {
   content: "\EA0F";
 }
-/* '' */
+/* '顮�' */
 [class^="weui_icon_"]:before,
 [class*=" weui_icon_"]:before {
   margin: 0;
@@ -192,7 +192,7 @@ a {
 }
 button.weui_btn,
 input.weui_btn {
-  width: 100%;
+  width: 80%;
   border-width: 0;
   outline: 0;
   -webkit-appearance: none;

@@ -13,15 +13,18 @@
 </head>
 <body>
  	<div class="container"> 	
+ 		<br><br>
 	 	<h4 class="page_title">${vediotitle}:</h4><br>
 		
 		<br>
-		<!--${m3u8str}  --><br><br>
+		<!--${m3u8str}  --><br><br><p align="center">
 	 	<video id="player"  webkit-playsinline="" 
 	 		autoplay="" type="m3u8" 
+	 		controls="controls" height="80%" width="80%" 
 	 		poster="${m3u8str}" 
 	 		src="${m3u8str}">
 	 	</video>
+	 	</p>
 	 	
 	 </div>
 </body>
