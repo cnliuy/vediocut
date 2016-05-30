@@ -44,7 +44,7 @@ spring boot 快速构建代码网站 http://start.spring.io/ （spring boot 代�
 
  <br>
    传到服务器需要调整的内容<br>
-   1，服务器系统时间需要同步<br>
+   1.服务器系统时间需要同步<br>
    2.tools下 M3u8Download GoGetFileSavePath() 文件的存放目录<br>
    3.application.properties 中数据库的端口和密码<br>
    4.入口   Live2Controller<br> 
