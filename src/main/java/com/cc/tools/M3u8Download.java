@@ -212,9 +212,12 @@ public class M3u8Download {
 							//出现了问题 不做保存
 						}else{
 							Long tstimesecond = DataConvertTools.DataStringToTimestampLong(tsp.getTsdatetime());
-							tsp.setTstimesecond(tstimesecond); 					
-							tspojoDao.save(tsp);  //将数据保存到数据库
-							
+							tsp.setTstimesecond(tstimesecond); 	
+							//在下载完成之后，再核查一次数据库中是否存在了对象  下载的时候也需要时间，期间可能有新对象产生
+							Tspojo  sectcp = tspojoDao.findByName(tsp.getName()) ;
+							if(sectcp == null){	  
+								tspojoDao.save(tsp);  //将数据保存到数据库
+							}
 							//System.out.println("----------"+tsp.getName());
 						}
 		        	}
