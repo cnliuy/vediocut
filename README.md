@@ -13,6 +13,8 @@ spring boot 快速构建代码网站 http://start.spring.io/ （spring boot 代�
           作。<br>   
           随后实现，自动生成m3u8的工作<br>
           在com.cc.VediocutApplicationde下 打开@EnableScheduling注释 开始ts片段的下载操作
+        
+          
           
 ###版本0.11：
 ----视频下载后存放位置 \vediocut\vediocut\src\main\resources\static\live\live2\TJ2\800\TJ2-800-node1_20160504102158_1460161734.ts<br>
@@ -39,4 +41,13 @@ spring boot 快速构建代码网站 http://start.spring.io/ （spring boot 代�
     
     注意系统时间的同步问题，时间必须统一，才能正确截取视频。
     
-	
+
+    传到服务器需要调整的内容<br>
+   1，服务器系统时间需要同步<br>
+   2.tools下 M3u8Download GoGetFileSavePath() 文件的存放目录<br>
+   3.application.properties 中数据库的端口和密码<br>
+   4.入口   Live2Controller<br> 
+   
+   
+   
+   
