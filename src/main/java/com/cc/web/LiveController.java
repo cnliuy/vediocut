@@ -75,7 +75,7 @@ public class LiveController {
 		int tscount = tiemlengthi/ts_per_time;		 
 		tspojo_tstimesecond_end = tspojo_tstimesecond_start+ tiemlengthi;	
 		System.out.println(tspojo_tstimesecond_start + "------------"+tspojo_tstimesecond_end);
-		List<Tspojo> tspojos= tspojoDao.findByTstimesecondBetweenOrderByIdAsc(tspojo_tstimesecond_start, tspojo_tstimesecond_end);
+		List<Tspojo> tspojos= tspojoDao.findDistinctNameByTstimesecondBetweenOrderByIdAsc(tspojo_tstimesecond_start, tspojo_tstimesecond_end);
 		Iterator<Tspojo> tspojosi = tspojos.iterator();
 		String pageReturnStr4 = "" ;		 
 		String pageReturnStr4_part2 = "" ;
@@ -150,7 +150,7 @@ public class LiveController {
 		int tscount = tiemlengthi/ts_per_time;		 
 		tspojo_tstimesecond_end = tspojo_tstimesecond_start+ tiemlengthi;	
 		System.out.println(tspojo_tstimesecond_start + "------------"+tspojo_tstimesecond_end);
-		List<Tspojo> tspojos= tspojoDao.findByTstimesecondBetweenOrderByIdAsc(tspojo_tstimesecond_start, tspojo_tstimesecond_end);
+		List<Tspojo> tspojos= tspojoDao.findDistinctNameByTstimesecondBetweenOrderByIdAsc(tspojo_tstimesecond_start, tspojo_tstimesecond_end);
 		Iterator<Tspojo> tspojosi = tspojos.iterator();
 		String pageReturnStr = "" ;
 		String pageReturnStr_part1 = "" ;

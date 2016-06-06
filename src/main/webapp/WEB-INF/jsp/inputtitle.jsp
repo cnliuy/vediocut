@@ -4,10 +4,14 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<script src="/js/jquery/jquery-2.2.4.min.js"></script>
+	<meta http-equiv="Content-Type" content="charset=UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" />
 	<link rel="stylesheet" href="/css/weui.css"/>
+	<link rel="stylesheet" href="/css/jquery-weui.min.css">
+	<script src="/js/jquery/jquery-2.2.4.min.js"></script>
+	<script src="/js/jquery/jquery-weui.min.js"></script>
     <link rel="stylesheet" href="/css/example.css"/>
+    
 	
 	<script>
 		var  downloadstat = 0;
@@ -63,40 +67,57 @@
 </head>
 
 <body>
- 	<div class="container"> 		
-	 
-		<h1 class="page_title">视频截取</h1><br>
-		<div class="weui_cells weui_cells_form">
-			<form action="/livex/toplayvedio" method="post">		  
-			  <input type="hidden" name="vediotimestamp" class="weui_input" value="${vediotimestamp}" />
-			  
-			  <div class="weui_cell">	
-			  		<div class="weui_cell_hd">
-			  			<label class="weui_label">视频标题:</label>
-			  		</div>
-			 
-			  		<div class="weui_cell_bd weui_cell_primary">               
-	                	<input type="text"   name="title"  class="weui_input" placeholder="在此输入视频的标题" />  
-	            	</div>
-		      </div>
-		      <div class="button_sp_area">	      	
-			      <input id="vediocutbutton" name="vediocutbutton"  type="button"  value="截取视频"
-			       			class="weui_btn weui_btn_primary"/>	     
-			      <input id="submitbutton" name="submit"  type="submit"  
-			      			value="生成分享页面分享" class="weui_btn weui_btn_primary"/> 
-			    </div> 
-			</form>
-		</div>
-		<br>
-		<div  id="div123">   
-			<p id="p1" class="weui_media_desc"></p>
-			<p id="p2" class="weui_media_desc"></p>
-		</div>
-		<!--状态链接： <a href="${doloadstatus}" target="_blank">${doloadstatus}</a>-->
-		
-		
+ 	<div class="container"> 
+ 	<div class="hd">		
+	 	<br><br>
+		 <h4 class="page_title" align="center">视频截取</h4><br>
 	</div>
 	
+	<div class="bd">
+		
+		<div class="weui_cells ">
+				<form action="/livex/toplayvedio" method="post">
+					  <div class="weui_cell">	
+					  	<div class="weui_cell_hd">		  
+					  	<input type="hidden" name="vediotimestamp"  value="${vediotimestamp}" />
+					  	</div>					  	
+					  </div>
+					  <div class="weui_cell">	
+					  		<div class="weui_cell_hd">
+					  			<label class="weui_label">视频标题</label>
+					  		</div>
+					 
+					  		<div class="weui_cell_bd">               
+			                	<input type="text"   name="title"  class="weui_input" placeholder="输入视频的标题" />  
+			            	</div>
+				      </div>
+		</div>
+	     
+	    
+	    
+	    
+		<div class="weui_btn_area">     	
+		      <input id="vediocutbutton" name="vediocutbutton"  type="button"  value="截取视频"
+			       			class="weui_btn weui_btn_primary"/>	     
+		      <input id="submitbutton" name="submit"  type="submit"  
+			      			value="分享视频到朋友圈" class="weui_btn weui_btn_primary"/> 
+		 </div> 
+				</form>
+			
+	</div>	<!-- 结束bd -->
+	
+	<div  id="div123" >   
+					<p id="p1" class="weui_media_desc" class="page_desc"></p>
+					<p id="p2" class="weui_media_desc" class="page_desc"></p>
+	</div>
+	
+			<!--状态链接： <a href="${doloadstatus}" target="_blank">${doloadstatus}</a>-->
+		
+		
+		
+	</div><!-- 结束container -->
+	
+
 </body>	
 
 </html>

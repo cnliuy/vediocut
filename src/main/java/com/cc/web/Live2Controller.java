@@ -93,7 +93,10 @@ http://127.0.0.1:8080/livex/TJ2-800-vedioclip.m3u8?timelength=60&timestamp=14623
 http%3A%2F%2F43.224.208.195%2Flive%2Fcoship%2CTWSX1422589417980523.m3u8%3Ffmt%3Dx264_0k_mpegts  天津1 
 http://43.224.208.195/live/coship,TWSX1422589417980523.m3u8?fmt=x264_0k_mpegts
 ---
-http://127.0.0.1:8080/livex/liveclip?timelength=60&liveUrl=http%3A%2F%2F43.224.208.195%2Flive%2Fcoship%2CTWSX1422589417980523.m3u8%3Ffmt%3Dx264_0k_mpegts
+http://127.0.0.1:80/livex/liveclip?timelength=60&liveUrl=http%3A%2F%2F43.224.208.195%2Flive%2Fcoship%2CTWSX1422589417980523.m3u8%3Ffmt%3Dx264_0k_mpegts
+211.148.171.93
+http://211.148.171.93/livex/liveclip?timelength=60&liveUrl=http%3A%2F%2F43.224.208.195%2Flive%2Fcoship%2CTWSX1422589417980523.m3u8%3Ffmt%3Dx264_0k_mpegts
+
 	 * 
 	 *  
 	 *  需要截取的时长      timelength  X秒 
@@ -224,7 +227,7 @@ http://127.0.0.1:8080/livex/liveclip?timelength=60&liveUrl=http%3A%2F%2F43.224.2
 		int tscount = tiemlengthi/ts_per_time;		 
 		tspojo_tstimesecond_start = tspojo_tstimesecond_end- tiemlengthi;	
 		System.out.println(tspojo_tstimesecond_start + "------------"+tspojo_tstimesecond_end);
-		List<Tspojo> tspojos= tspojoDao.findByTstimesecondBetweenOrderByIdAsc(tspojo_tstimesecond_start, tspojo_tstimesecond_end);
+		List<Tspojo> tspojos= tspojoDao.findDistinctNameByTstimesecondBetweenOrderByIdAsc(tspojo_tstimesecond_start, tspojo_tstimesecond_end);
 		Iterator<Tspojo> tspojosi = tspojos.iterator();
 		String pageReturnStr4 = "" ;		 
 		String pageReturnStr4_part2 = "" ;
@@ -345,7 +348,7 @@ http://127.0.0.1:8080/livex/liveclip2?liveUrl=http%3A%2F%2F43.224.208.195%2Flive
 		int tscount = tiemlengthi/ts_per_time;		 
 		tspojo_tstimesecond_end = tspojo_tstimesecond_start+ tiemlengthi;	
 		System.out.println(tspojo_tstimesecond_start + "------------"+tspojo_tstimesecond_end);
-		List<Tspojo> tspojos= tspojoDao.findByTstimesecondBetweenOrderByIdAsc(tspojo_tstimesecond_start, tspojo_tstimesecond_end);
+		List<Tspojo> tspojos= tspojoDao.findDistinctNameByTstimesecondBetweenOrderByIdAsc(tspojo_tstimesecond_start, tspojo_tstimesecond_end);
 		Iterator<Tspojo> tspojosi = tspojos.iterator();
 		String pageReturnStr = "" ;
 		String pageReturnStr_part1 = "" ;

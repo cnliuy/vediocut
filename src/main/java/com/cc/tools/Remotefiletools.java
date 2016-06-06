@@ -206,12 +206,12 @@ public class Remotefiletools {
             System.out.println("dataString:"+dataString);//dataString:20160429162256
             System.out.println("seqString:"+seqString);//seqString:1460079664
             System.out.println("pindaoString:"+pindaoString);//pindaoString:TJ2-800-node1
-            Tspojo tspojo =  tspojoDao.findByName(tsname);
+            List <Tspojo> tspojo =  tspojoDao.findByName(tsname);
             /**
              * 需事务处理
              * 
              * */
-            if (tspojo==null){
+            if (tspojo.size()==0){ //tspojo==null
             	//不存在该文件 进行下载
                 //单个文件的多线程下载 
                 String oofilename = MutilDownTools.MutilDown(3, destFilePath+File.separator+tsname,tmpurl ); //下载完成               
@@ -226,7 +226,7 @@ public class Remotefiletools {
         		tspojoDao.save(tspojo2);  //将数据保存到数据库       
         		System.out.println("============ 保存数据库成功  tsname:"+tsname); 
             }else{
-            	System.out.println("-----------该 tspojo 数据已存在 不做保存 ："+tspojo.getName());
+            	System.out.println("-----------该 tspojo 数据已存在 不做保存 ："+tspojo.get(0).getName());
             }
             
     		//System.out.println("oofilename:"+oofilename);

@@ -202,9 +202,9 @@ public class M3u8Download {
 		        for(int k=0 ; k< new_tspojo_need_download.size();k++){	        	
 		        	String destfilePath = M3u8Download.GoGetFileSavePath();
 		        	Tspojo tsp = new_tspojo_need_download.get(k);	
-		        	Tspojo oldtsp = tspojoDao.findByName(tsp.getName());
+		        	List <Tspojo> oldtsp = tspojoDao.findByName(tsp.getName());
 		        	
-		        	if(oldtsp == null){	        		
+		        	if(oldtsp.size() <1 ){	//oldtsp == null        		
 		        		//新文件需要下载 
 			        	//下载保存文件
 						String oofilename = MutilDownTools.MutilDown(Someconstant.download_threads, destfilePath+File.separator+tsp.getName(),tsp.getDownloadurl() ); //下载完成               
@@ -214,8 +214,8 @@ public class M3u8Download {
 							Long tstimesecond = DataConvertTools.DataStringToTimestampLong(tsp.getTsdatetime());
 							tsp.setTstimesecond(tstimesecond); 	
 							//在下载完成之后，再核查一次数据库中是否存在了对象  下载的时候也需要时间，期间可能有新对象产生
-							Tspojo  sectcp = tspojoDao.findByName(tsp.getName()) ;
-							if(sectcp == null){	  
+							List <Tspojo>  sectcp = tspojoDao.findByName(tsp.getName()) ;
+							if(sectcp.size() == 0){	  //sectcp == null
 								tspojoDao.save(tsp);  //将数据保存到数据库
 							}
 							//System.out.println("----------"+tsp.getName());

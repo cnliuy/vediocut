@@ -15,8 +15,8 @@ import com.cc.entity.Tspojo;
 public interface TspojoDao extends CrudRepository<Tspojo, Long>{
 	
 	
-	  public Tspojo findByName (String name);
+	  public  List<Tspojo>  findByName (String name);
 	  
 	  
-	  public List<Tspojo> findByTstimesecondBetweenOrderByIdAsc (Long starttime, Long endtime); 
+	  public List<Tspojo> findDistinctNameByTstimesecondBetweenOrderByIdAsc (Long starttime, Long endtime); 
 }

@@ -120,8 +120,9 @@ public class M3u8DownloadC {
 		        	tmpSeqint = Integer.parseInt(tsname_arr[2].substring(0, tsname_arr[2].length()-3));	        		
 		        	System.out.println("tmpSeqint:"+tmpSeqint);//tmpSeqint:1460526735
 		        	System.out.println("tmpd1date:"+tmpd1date);
-		        	Tspojo tp = tspojoDao.findByName(tsname);
-		        	if(tp==null){
+		        	List<Tspojo> tpa = tspojoDao.findByName(tsname);
+		        	Tspojo tp ;
+		        	if(tpa.size()<1){//tp==null
 		        		tp = new Tspojo();		        		
 			        	tp.setDownloadurl(tmpurl);
 			        	tp.setName(tsname);
