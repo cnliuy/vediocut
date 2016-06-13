@@ -17,7 +17,7 @@ import com.cc.entity.Tspojo;
 public interface TslocalstatuspojoDao extends CrudRepository<Tslocalstatuspojo, Long>{
 	
 	
-	  public Tslocalstatuspojo findByTstimesecond (Long tstimesecond);
+	  public List<Tslocalstatuspojo> findByTstimesecond (Long tstimesecond);
 	  
 	  
 	  public List<Tspojo> findByTstimesecondBetween (Long starttime, Long endtime); 

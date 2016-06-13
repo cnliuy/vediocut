@@ -224,8 +224,8 @@ public class M3u8Download {
 		        }	       
 			}
 			System.out.println("======================== 下载完成 =====================");
-			Tslocalstatuspojo tslocalstatuspojo = tslocalstatuspojoDao.findByTstimesecond(nowtime) ;
-			if(tslocalstatuspojo == null){
+			List <Tslocalstatuspojo> tslocalstatuspojo = tslocalstatuspojoDao.findByTstimesecond(nowtime) ;
+			if( tslocalstatuspojo.size()==0 ||tslocalstatuspojo == null ){
 				Tslocalstatuspojo  tlsp = new Tslocalstatuspojo();
 				tlsp.setTstimesecond(nowtime);
 				tlsp.setTsstat(1);

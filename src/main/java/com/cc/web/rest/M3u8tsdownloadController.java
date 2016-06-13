@@ -1,5 +1,7 @@
 package com.cc.web.rest;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,15 +27,21 @@ public class M3u8tsdownloadController {
 	public String m3u8downloadbeok(HttpServletRequest request) {
 	  String nowtime = request.getParameter("vediotimestamp");
 	  Long nowtimel = Long.parseLong(nowtime);
-	  Tslocalstatuspojo tslocalstatuspojo = tslocalstatuspojoDao.findByTstimesecond(nowtimel);
-	  if(tslocalstatuspojo == null){
+	  List <Tslocalstatuspojo> tslocalstatuspojo = tslocalstatuspojoDao.findByTstimesecond(nowtimel);
+	  if(tslocalstatuspojo == null || tslocalstatuspojo.size() == 0){
 		  return "0";
 	  }else{
-		 if ( tslocalstatuspojo.getTsstat() == 1 ){
-			 return "1";
-		 }else{
-			 return "0";
-		 }
+		  if(tslocalstatuspojo.get(0) != null){
+		
+			 if ( tslocalstatuspojo.get(0).getTsstat() == 1 ){
+				 return "1";
+			 }else{
+				 return "0";
+			 }
+		  }else{
+			  return "0";
+		  }
+		 
 	  }	
 	  //return "Greetings from Spring Boot!";
 	}
