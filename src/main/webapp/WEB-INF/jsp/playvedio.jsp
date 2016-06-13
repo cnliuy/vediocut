@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html lang="utf-8">
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
@@ -14,20 +13,25 @@
 </head>
 <body>
  	<div class="container"> 	
- 		<br><br>
-	 	<h4 class="page_title">${vediotitle}:</h4><br>
+ 		<div class="hd"> 		
+	 		<h4 class="page_title">${vediotitle}:</h4><br>
+		</div>
 		
-		<br>
-		<!--${m3u8str}  --><br><br><p align="center">
-	 	<video id="player"  webkit-playsinline="" 
-	 		autoplay="" type="m3u8" 
-	 		controls="controls" height="80%" width="80%" 
-	 		poster="${m3u8str}" 
-	 		src="${m3u8str}">
-	 	</video>
-	 	</p>
-	 	
-	 </div>
+		<div align="center">
+			<div class="bd">
+				<!--${m3u8str}  -->
+			 	<video id="player"  webkit-playsinline="" 
+			 		type="m3u8" 
+			 		controls="controls" height="80%" width="80%" 
+			 		poster="${m3u8str}" 
+			 		src="${m3u8str}">
+			 		您的浏览器不支持vedio标签
+			 	</video>
+			 	<!-- autoplay=""  -->
+		 	</div>	 
+	 	</div>
+	 	<br><br>
+	 </div>
 </body>
 
 </html>
