@@ -31,7 +31,7 @@ public class MutilDownTools {
 						e.printStackTrace();
 					}
 					long fileLen = getFileLength(url);
-					System.out.println("网络资源的大小" + fileLen);
+					//System.out.println("网络资源的大小" + fileLen);
 					//以输出文件名创建第一个RandomAccessFile输出流
 					//创建从中读取和向其中写入（可选）的随机存取文件流，第一个参数：文件名，第二个参数是：参数指定用以打开文件的访问模式
 					//"rw"可能是可读可写，
@@ -65,9 +65,12 @@ public class MutilDownTools {
 									isArr[i], outArr[i]).start();
 						}
 					}
+					System.out.println("--------下载："+OUT_FILE_NAME+"---OK");
 				} catch (Exception ex) {
 					OUT_FILE_NAME ="";
 					ex.printStackTrace();
+					
+				}finally {
 					
 				}
 				

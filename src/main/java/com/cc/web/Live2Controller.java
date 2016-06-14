@@ -52,8 +52,8 @@ http://211.148.171.93:80/livex/liveclip?timelength=60&liveUrl=http%3A%2F%2F43.22
 public class Live2Controller {
 	
 	
-	private  String ipaddress = "10.0.0.35";
-	
+	//private  String ipaddress = "10.0.0.35";
+	private  String ipaddress = "127.0.0.1";
 	
 	private  String ipport = "80";
 	

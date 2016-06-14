@@ -63,7 +63,7 @@ public class M3u8Download {
 	
 
 	/**
-	 * 
+	 * ---- be used
 	 * tsname_length : ts 文件名参数   本例中  TJ2-800-node1_20160429160206_1460079414.ts 为 42
 	 * timegap : 截取的视频时长   精确到秒
 	 * uuids ：鉴别符号
@@ -101,7 +101,7 @@ public class M3u8Download {
 		       	String tmpurl ;	        
 		        
 		        DateFormat df = new SimpleDateFormat("yyyyMMddHHmmss");//20160429162256
-		        Date tmpd1date =df.parse("20010101010101"); 
+		        Date tmpd1date =df.parse("20010101010101");
 		        int tmpSeqint = 0;
 		        Long timediff = 0L ; //时间差 ts之间的
 		        int seqdiff = 0 ;//序列之间的差
@@ -146,8 +146,8 @@ public class M3u8Download {
 		        		try {
 							tmpd1date = df.parse(tsname_arr[1]);
 			        		tmpSeqint = Integer.parseInt(tsname_arr[2].substring(0, tsname_arr[2].length()-3));	        		
-			        		System.out.println("tmpSeqint:"+tmpSeqint);
-			        		System.out.println("tmpd1date:"+tmpd1date);
+			        		//System.out.println("tmpSeqint:"+tmpSeqint);
+			        		//System.out.println("tmpd1date:"+tmpd1date);
 						} catch (ParseException e) {						
 							e.printStackTrace();
 						}
@@ -199,11 +199,12 @@ public class M3u8Download {
 		         * */
 		        //List <Tspojo> returntslist = new ArrayList<Tspojo>();
 		        List <Tspojo> new_tspojo_need_download = Lists.reverse(tspojo_need_download);
+		        
 		        for(int k=0 ; k< new_tspojo_need_download.size();k++){	        	
 		        	String destfilePath = M3u8Download.GoGetFileSavePath();
 		        	Tspojo tsp = new_tspojo_need_download.get(k);	
 		        	List <Tspojo> oldtsp = tspojoDao.findByName(tsp.getName());
-		        	
+		        	System.out.println("下载文件为----"+tsp.getName());
 		        	if(oldtsp.size() <1 ){	//oldtsp == null        		
 		        		//新文件需要下载 
 			        	//下载保存文件
