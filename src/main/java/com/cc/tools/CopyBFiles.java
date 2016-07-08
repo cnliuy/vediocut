@@ -17,7 +17,7 @@ import java.util.List;
  * */
 public class CopyBFiles {
 	
-	public static void main(String[] args) throws Exception {
+	public static void main_mm(String[] args) throws Exception {
 		
 		String in_file_Path= "F:"+File.separator+"Java2016"+File.separator+"src"+File.separator+"vediocut"+File.separator+
 								"vediocut"+File.separator+"vedios";

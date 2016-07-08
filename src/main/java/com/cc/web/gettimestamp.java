@@ -6,7 +6,7 @@ import java.net.URLEncoder;
 
 public class gettimestamp {
 
-    public static void main(String[] args) {
+    public static void main_mm(String[] args) {
         String timestamp = String.valueOf(System.currentTimeMillis());
          //System.out.println(timestamp ); 
         String yifei_url = "http://eshare.h5.otvcloud.com/qscontents/jcs/yangma/sharing.html?liveUrl=" ;

@@ -13,7 +13,7 @@ import java.net.URL;
  */
 public class MulThreadDownload {
  
-    public static void main(String[] args) throws Exception {
+    public static void main_mm(String[] args) throws Exception {
         String path = "http://pic.4j4j.cn/upload/pic/20130909/681ebf9d64.jpg";
         new MulThreadDownload().download(path,3);
     }

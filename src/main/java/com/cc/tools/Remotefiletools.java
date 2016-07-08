@@ -44,7 +44,7 @@ public class Remotefiletools {
      *    
      *    timestamp=1461833911464
      * */
-    public static void main(String[] args) throws ClassNotFoundException { 
+    public static void main_mm(String[] args) throws ClassNotFoundException { 
     	long s = System.nanoTime();//---计时器开始
     	String url ="http://43.224.208.195/live/coship,TWSX1422589417980523.m3u8?fmt=x264_0k_mpegts";
     	String srcurl ="http://43.224.208.195/";

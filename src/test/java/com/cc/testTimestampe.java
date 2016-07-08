@@ -8,7 +8,7 @@ import java.util.Calendar;
 
 public class testTimestampe {
 
-	public static void main(String[] args) {	
+	public static void main_mm(String[] args) {	
 		String s = "20160520150953";
 		long timestampslong =  DataStringToTimestampLong(s) ;
 		System.out.println(s+"-----》"+timestampslong+"521 (精确到秒)");

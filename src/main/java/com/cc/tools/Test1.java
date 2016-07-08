@@ -13,7 +13,7 @@ import java.nio.channels.FileChannel.MapMode;
 //Java最快Append二进制内容到文件的方法
 public class Test1 {
 	//值得注意的是：需要用二进制比较工具确认大家写的内容都是一样
-	public static void main(String[] args) throws Exception {
+	public static void main_mm(String[] args) throws Exception {
 		//没有缓冲的RandomAccessFile直接写, 因为耗时太长所以直接排除
 		//test1("D:/test1.tmp",1000000);
 		

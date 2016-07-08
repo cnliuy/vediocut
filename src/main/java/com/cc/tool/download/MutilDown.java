@@ -8,7 +8,7 @@ import java.net.URLConnection;
 
 public class MutilDown {
 
-	public static void main(String[] args) {
+	public static void main_mm(String[] args) {
 		//定义几个线程去下载
 		final int DOWN_THREAD_NUM = 4;
 		final String OUT_FILE_NAME = "down.jpg";

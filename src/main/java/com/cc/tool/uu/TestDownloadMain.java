@@ -15,7 +15,7 @@ package com.cc.tool.uu;
  */
 public class TestDownloadMain {
  
-    public static void main(String[] args) {
+    public static void main_mm(String[] args) {
         /*DownloadInfo bean = new DownloadInfo("http://i7.meishichina.com/Health/UploadFiles/201109/2011092116224363.jpg");
         System.out.println(bean);
         BatchDownloadFile down = new BatchDownloadFile(bean);

@@ -16,7 +16,7 @@ public class URItool {
 	 * @throws MalformedURLException 
 	 *
 	 * **/
-	public static void main(String[] args) throws MalformedURLException {
+	public static void main_mm(String[] args) throws MalformedURLException {
 		String URIString = "http%3A%2F%2F43.224.208.195%2Flive%2Fcoship%2CTWSX1422595673115099.m3u8%3Ffmt%3Dx264_0k_mpegts";  
 		System.out.println(URItool.URI2URL(URIString) );
 		
