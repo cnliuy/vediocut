@@ -74,7 +74,7 @@ current class, org/apache/jsp/WEB_002dINF/jsp/welcome_jsp, and the class loader
         at javax.servlet.http.HttpServlet.service(HttpServlet.java:725) ~[servlet-api.jar:na]
         at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:291) [catalina.jar:8.0.14]
         at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:206) [catalina.jar:8.0.14]
-       。。。。。
+<br>  。。。。。<br>
         at java.lang.Thread.run(Thread.java:745) [na:1.8.0_25]
 Caused by: java.lang.LinkageError: loader constraint violation: when resolving method "org.apache.jasper.runtime.InstanceManagerFactory.getInstanceManager(Ljavax/servlet/ServletConfig;)Lorg/apache/tomcat/InstanceManager;" the class loader (instance of org/apache/jasper/servlet/JasperLoader) of the current class, org/apache/jsp/WEB_002dINF/jsp/welcome_jsp, and the class loader (instance of java/net/URLClassLoader) for the method's defining class, org/apache/jasper/runtime/InstanceManagerFactory, have different Class objects for the type org/apache/tomcat/InstanceManager used in the signature
         at org.apache.jsp.WEB_002dINF.jsp.welcome_jsp._jspInit(welcome_jsp.java:45) ~[na:na]
