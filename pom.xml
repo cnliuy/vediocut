@@ -70,13 +70,13 @@
 		</dependency>
 		-->
 		
- 		<!--  部署war包时  需要 注释掉
+ 		<!--  部署war包时 需要这个  correct  千万不要注释掉-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-tomcat</artifactId>
 			<scope>provided</scope>
 		</dependency>
-
+		<!--  
 		<dependency>
 			<groupId>org.freemarker</groupId>
 			<artifactId>freemarker</artifactId>

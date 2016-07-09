@@ -49,6 +49,18 @@ spring boot 快速构建代码网站 http://start.spring.io/ （spring boot 代�
    3.application.properties 中数据库的端口和密码<br>
    4.入口   Live2Controller<br> 
    
-   
-   
+ <br>  
+ 
+ 
+ ###版本0.12.1
+ 	可以达成war包 部署。<br>
+ 	注意以下： <br>
+		<!--  部署war包时 需要这个  correct  千万不要注释掉--><br>
+		<dependency><br>
+			<groupId>org.springframework.boot</groupId><br>
+			<artifactId>spring-boot-starter-tomcat</artifactId><br>
+			<scope>provided</scope><br>
+		</dependency><br>
+		
+		
    
