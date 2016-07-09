@@ -53,17 +53,17 @@ spring boot 快速构建代码网站 http://start.spring.io/ （spring boot 代�
  
 
 ###版本0.12.1
- 	可以达成war包 部署。<br>
- 	注意以下： <br>
-		<!--  部署war包时 需要这个  correct  千万不要注释掉--><br>
-		<dependency><br>
-			<groupId>org.springframework.boot</groupId><br>
-			<artifactId>spring-boot-starter-tomcat</artifactId><br>
-			<scope>provided</scope><br>
-		</dependency><br>
+ 	可以打成war包 部署。
+ 	注意以下： 
+		<!--  部署war包时 需要这个  correct  千万不要注释掉-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-tomcat</artifactId>
+			<scope>provided</scope>
+		</dependency>
 		
 --------------------------------
-对应报错如下：
+pom.xml不加上述内容，对应报错如下：<br>
 2016-07-08 17:38:46.502 ERROR 102760 --- [nio-8080-exec-1] o.s.boot.context.web.ErrorPageFilter     : Forwarding to error page from request [/wel] due to exception [java.lang.LinkageError: loader constraint violation: when resolving method
 "org.apache.jasper.runtime.InstanceManagerFactory.getInstanceManager(Ljavax/servlet/ServletConfig;)Lorg/apache/tomcat/InstanceManager;" the class loader (instance of org/apache/jasper/servlet/JasperLoader) of the current class, org/apache/jsp/WEB_002dINF/jsp/welcome_jsp, and the class loader (instance of java/net/URLClassLoader) for the method's defining class, org/apache/jasper/runtime/InstanceManagerFactory, have different Class objects for the type org/apache/tomcat/InstanceManager used in the signature]
 
