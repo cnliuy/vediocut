@@ -2,6 +2,11 @@
 
 <!DOCTYPE html>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
+
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
@@ -14,8 +19,8 @@
 	<br>
 	JSTL URL: ${url}
 	<br>
-	Message: ${message}
-	
+	Message: ${message}<br>
+	path:<%=path %><br>basePath:<%=basePath %><br>
 	你好
 </body>
 

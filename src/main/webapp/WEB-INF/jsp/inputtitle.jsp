@@ -2,15 +2,19 @@
 <!DOCTYPE html lang="utf-8">
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="charset=UTF-8">
 	<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" />
-	<link rel="stylesheet" href="/css/weui.css"/>
-	<link rel="stylesheet" href="/css/jquery-weui.min.css">
-	<script src="/js/jquery/jquery-2.2.4.min.js"></script>
-	<script src="/js/jquery/jquery-weui.min.js"></script>
-    <link rel="stylesheet" href="/css/example.css"/>
+	<link rel="stylesheet" href="<%=path %>/css/weui.css"/>
+	<link rel="stylesheet" href="<%=path %>/css/jquery-weui.min.css">
+	<script src="<%=path %>/js/jquery/jquery-2.2.4.min.js"></script>
+	<script src="<%=path %>/js/jquery/jquery-weui.min.js"></script>
+    <link rel="stylesheet" href="<%=path %>/css/example.css"/>
     
 	
 	<script>
@@ -28,7 +32,7 @@
 					 	
 						function consoleInfo(){	
 							//alert("。。。");	
-							$.get("/rest/downloadbeok?vediotimestamp=${vediotimestamp}",function(data,status){
+							$.get("<%=path %>/rest/downloadbeok?vediotimestamp=${vediotimestamp}",function(data,status){
 								if(data=="1"){
 									//alert("视频截取成功");
 									downloadstat =1 ;
@@ -76,10 +80,11 @@
 	<div class="bd">
 		
 		<div class="weui_cells ">
-				<form action="/livex/toplayvedio" method="post">
+				<form action="<%=path %>/livex/toplayvedio" method="post">
 					  <div class="weui_cell">	
 					  	<div class="weui_cell_hd">		  
 					  	<input type="hidden" name="vediotimestamp"  value="${vediotimestamp}" />
+					  	
 					  	</div>					  	
 					  </div>
 					  <div class="weui_cell">	
