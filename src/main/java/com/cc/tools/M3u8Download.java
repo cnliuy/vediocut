@@ -195,7 +195,7 @@ public class M3u8Download {
 		        }
 		        
 		        /**
-		         * 获取ts下载列表  为倒序形式的。
+		         * 获取ts下载列表  为倒序形式的。 
 		         * */
 		        //List <Tspojo> returntslist = new ArrayList<Tspojo>();
 		        List <Tspojo> new_tspojo_need_download = Lists.reverse(tspojo_need_download);
@@ -277,6 +277,23 @@ public class M3u8Download {
 					File.separator+"webapp"+File.separator+"live"
 					+File.separator+"live2"+File.separator+"TJ2"+File.separator+"800"; 
         	
+        	destFilePath="F:"+File.separator+"Java2016"+File.separator+"src"+File.separator+"vediocut"+
+					File.separator+"vediocut"+File.separator+"src"+File.separator+"main"+
+					File.separator+"webapp"+File.separator+"live"
+					+File.separator+"live2"+File.separator+"TJ2"+File.separator+"800"; 
+        	//本地Tomcat目录
+        	//	E:\Java\Java8\apache-tomcat-8.0.14\apache-tomcat-8.0.14\webapps\vepl\live
+        	destFilePath="E:"+File.separator+"Java"+File.separator+"Java8"+File.separator+"apache-tomcat-8.0.14"+File.separator+"apache-tomcat-8.0.14"+File.separator+
+        					"webapps"+
+					File.separator+"vepl"+File.separator+"live"
+					+File.separator+"live2"+File.separator+"TJ2"+File.separator+"800"; 
+        	
+        	//---服务器的地址 tomcat 
+        	//C:\Java\apache-tomcat-8.0.20\webapps
+        	destFilePath="C:"+File.separator+"Java"+File.separator+"apache-tomcat-8.0.20"+File.separator+
+					"webapps"+
+			File.separator+"vepl"+File.separator+"live"
+			+File.separator+"live2"+File.separator+"TJ2"+File.separator+"800"; 
         	//---服务器的地址
         	//---C:\Java\vediosrc_git\vediocut\src\main\webapp\live\live2\TJ2\800
 //        	destFilePath="C:"+File.separator+"Java"+File.separator+"vediosrc_git"+File.separator+"vediocut"

@@ -32,7 +32,7 @@ import com.cc.tools.URItool;
 
 
 /**
- * 视频截取 播放 类2  新
+ * 视频截取 播放 类2  新   在用
  * 
  * 
 http://127.0.0.1:80/livex/liveclip?timelength=60&liveUrl=http%3A%2F%2F43.224.208.195%2Flive%2Fcoship%2CTWSX1422589417980523.m3u8%3Ffmt%3Dx264_0k_mpegts
@@ -45,7 +45,9 @@ http://10.0.0.35:80/livex/liveclip?timelength=60&liveUrl=http%3A%2F%2F43.224.208
 
 http://211.148.171.93:80/livex/liveclip?timelength=60&liveUrl=http%3A%2F%2F43.224.208.195%2Flive%2Fcoship%2CTWSX1422589417980523.m3u8%3Ffmt%3Dx264_0k_mpegts
 
- * 
+ *    视频文件的存放目录放在  com.cc.tools.M3u8Download类中。
+ *    由 M3u8Download.GoGetFileSavePath()直接获取  destfilePath 视频文件的存放目录。
+ *     
  * */
 @Controller
 @RequestMapping("/livex")

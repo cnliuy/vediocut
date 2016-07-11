@@ -86,4 +86,9 @@ Caused by: java.lang.LinkageError: loader constraint violation: when resolving m
         ... 82 common frames omitted
 
 		
-   
+----------------------
+	打成war，部署到新环境时 需要更改的内容 ，详细参见  com.cc.ChangeEnvReadMe 中描述
+----------------------
+
+---------------------------------
+--EOF--
