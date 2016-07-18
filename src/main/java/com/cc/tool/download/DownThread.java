@@ -25,7 +25,7 @@ public class DownThread extends Thread {
 	// 构造器，传入输入流，输出流和下载起始点、结束点
 	public DownThread(long start, long end, InputStream is, RandomAccessFile raf) {
 		// 输出该线程负责下载的字节位置
-		System.out.println(start + "---->" + end);
+		//System.out.println(start + "---->" + end);
 		this.start = start;
 		this.end = end;
 		this.is = is;

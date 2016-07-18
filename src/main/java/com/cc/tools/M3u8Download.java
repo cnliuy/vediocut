@@ -93,10 +93,15 @@ public class M3u8Download {
 				e.printStackTrace();
 			}
 		} 
-		
-		
+		int tssize = 0 ;
+		if (ts_download_list == null  ){
+			
+		}else{
+			tssize = ts_download_list.size();
+		}
+		System.out.println("tssize:"+tssize);
 	    
-			if(ts_download_list.size()>0){	        
+			if(tssize>0){	        
 		       	List<String> in_filenames = new ArrayList<String>();
 		       	String tmpurl ;	        
 		        
@@ -156,8 +161,8 @@ public class M3u8Download {
 		        		try {
 							timediff = (df.parse(tsname_arr[1])).getTime() - tmpd1date.getTime() ;
 			        		seqdiff = Integer.parseInt(tsname_arr[2].substring(0, tsname_arr[2].length()-3)) - tmpSeqint;		        		
-			        		System.out.println("时间差 timediff:"+timediff);
-			        		System.out.println("序列差 seqdiff:"+seqdiff);
+			        		//System.out.println("时间差 timediff:"+timediff);
+			        		//System.out.println("序列差 seqdiff:"+seqdiff);
 						} catch (ParseException e) {
 							e.printStackTrace();
 						}	
@@ -191,7 +196,8 @@ public class M3u8Download {
 		        	tp.setTssequence(tmpseqi.toString());
 		        	tp.setTsdatetime(tmpdataString);
 		        	tp.setPindaostr(suffix_ok_String);
-		        	tspojo_need_download.add(tp);	        	
+		        	tspojo_need_download.add(tp);	  
+		        	System.out.println("-->>>--------tp.getName()-----------------"+tp.getName());//20160523170146
 		        }
 		        
 		        /**
@@ -204,7 +210,7 @@ public class M3u8Download {
 		        	String destfilePath = M3u8Download.GoGetFileSavePath();
 		        	Tspojo tsp = new_tspojo_need_download.get(k);	
 		        	List <Tspojo> oldtsp = tspojoDao.findByName(tsp.getName());
-		        	System.out.println("下载文件为----"+tsp.getName());
+		        	//System.out.println("下载文件为----"+tsp.getName());
 		        	if(oldtsp.size() <1 ){	//oldtsp == null        		
 		        		//新文件需要下载 
 			        	//下载保存文件
@@ -276,24 +282,19 @@ public class M3u8Download {
 					File.separator+"vediocut"+File.separator+"src"+File.separator+"main"+
 					File.separator+"webapp"+File.separator+"live"
 					+File.separator+"live2"+File.separator+"TJ2"+File.separator+"800"; 
-        	
-        	destFilePath="F:"+File.separator+"Java2016"+File.separator+"src"+File.separator+"vediocut"+
-					File.separator+"vediocut"+File.separator+"src"+File.separator+"main"+
-					File.separator+"webapp"+File.separator+"live"
-					+File.separator+"live2"+File.separator+"TJ2"+File.separator+"800"; 
         	//本地Tomcat目录
-        	//	E:\Java\Java8\apache-tomcat-8.0.14\apache-tomcat-8.0.14\webapps\vepl\live
-        	destFilePath="E:"+File.separator+"Java"+File.separator+"Java8"+File.separator+"apache-tomcat-8.0.14"+File.separator+"apache-tomcat-8.0.14"+File.separator+
-        					"webapps"+
-					File.separator+"vepl"+File.separator+"live"
+        	destFilePath="F:"+File.separator+"Java2016"+File.separator+"src"+File.separator+"vediocut"+
+					File.separator+"vediocut"+File.separator+"src"+File.separator+"main"+File.separator+"webapp"+File.separator+"live"
 					+File.separator+"live2"+File.separator+"TJ2"+File.separator+"800"; 
+        	//远程Tomcat目录  old
+        	//	E:\Java\Java8\apache-tomcat-8.0.14\apache-tomcat-8.0.14\webapps\vepl\live
+        	//destFilePath="E:"+File.separator+"Java"+File.separator+"Java8"+File.separator+"apache-tomcat-8.0.14"+File.separator+"apache-tomcat-8.0.14"+File.separator+
+        	//				"webapps"+File.separator+"vepl"+File.separator+"live"+File.separator+"live2"+File.separator+"TJ2"+File.separator+"800"; 
         	
-        	//---服务器的地址 tomcat 
-        	//C:\Java\apache-tomcat-8.0.20\webapps
-        	destFilePath="C:"+File.separator+"Java"+File.separator+"apache-tomcat-8.0.20"+File.separator+
-					"webapps"+
-			File.separator+"vepl"+File.separator+"live"
-			+File.separator+"live2"+File.separator+"TJ2"+File.separator+"800"; 
+        	//---服务器的地址 tomcat new--
+        	//C:\Java\apache-tomcat-8.0.36\webapps //------- 
+        	destFilePath="C:"+File.separator+"Java"+File.separator+"apache-tomcat-8.0.36"+File.separator+"webapps"+File.separator+"vepl"+File.separator+"live"+File.separator+"live2"+File.separator+"TJ2"+File.separator+"800"; 
+
         	//---服务器的地址
         	//---C:\Java\vediosrc_git\vediocut\src\main\webapp\live\live2\TJ2\800
 //        	destFilePath="C:"+File.separator+"Java"+File.separator+"vediosrc_git"+File.separator+"vediocut"
@@ -308,7 +309,7 @@ public class M3u8Download {
         	} catch (SecurityException e) {
         		   e.printStackTrace();
         	}
-        	System.out.println("目录path："+destFilePath);
+        	//System.out.println("目录path："+destFilePath);
         	return destFilePath ;
         	
 	}

@@ -65,9 +65,14 @@ public class MutilDownTools {
 									isArr[i], outArr[i]).start();
 						}
 					}
-					System.out.println("--------下载："+OUT_FILE_NAME+"---OK");
+					System.out.println("--------下载OK：---"+OUT_FILE_NAME+"---");
 				} catch (Exception ex) {
-					OUT_FILE_NAME ="";
+					//OUT_FILE_NAME ="";
+					if("".equals(OUT_FILE_NAME)||OUT_FILE_NAME==null){
+						System.out.println("--------下载Err：null file---");
+					}else{
+						System.out.println("--------下载Err：---"+OUT_FILE_NAME+"---");
+					}
 					ex.printStackTrace();
 					
 				}finally {

@@ -80,8 +80,8 @@ public class ScheduledTasks {
         }  
         
         long d = System.nanoTime() - s;//---计时器结束
-		System.out.println("花费时间 ="+(d/1000000)+"毫秒");   	
-        System.out.println("你好 The time is now " + dateFormat.format(new Date()));
+		//System.out.println("花费时间 ="+(d/1000000)+"毫秒");   	
+       // System.out.println("你好 The time is now " + dateFormat.format(new Date()));
     }
     
 

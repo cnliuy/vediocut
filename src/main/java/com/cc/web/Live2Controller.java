@@ -90,7 +90,7 @@ public class Live2Controller {
 	private String srcurl="http://43.224.208.195/";
 	
 	/**
-	 * 入口
+	 * 入口  多线程
 	 * 
 	 * 方法1 
 	 *  异步下载ts切片
@@ -139,7 +139,11 @@ http://211.148.171.93/livex/liveclip?timelength=60&liveUrl=http%3A%2F%2F43.224.2
 			//地址转化出现问题  异常
 			return null;  
 		}else{
+	
 			
+
+
+				
 	        return new Callable<String>() {  
 	            public String call() throws Exception {  
 	            	String uuids = UUID.randomUUID().toString();	            	
@@ -157,9 +161,62 @@ http://211.148.171.93/livex/liveclip?timelength=60&liveUrl=http%3A%2F%2F43.224.2
 	                return "inputtitle";  
 	            }  
 	        };  
-			
+	        
+	        
+						
 		}
 	}
+	
+	
+	
+	
+	
+	/**
+	 * 	入口  2	单线程	
+http://127.0.0.1:80/livex/liveclip3?timelength=60&liveUrl=http%3A%2F%2F43.224.208.195%2Flive%2Fcoship%2CTWSX1422589417980523.m3u8%3Ffmt%3Dx264_0k_mpegts
+http://211.148.171.93/livex/liveclip3?timelength=60&liveUrl=http%3A%2F%2F43.224.208.195%2Flive%2Fcoship%2CTWSX1422589417980523.m3u8%3Ffmt%3Dx264_0k_mpegts
+	 
+	 * 
+	 * */
+	
+	@RequestMapping("/liveclip3")
+	public String 	productVedioClip3(Map<String, Object> model, HttpServletRequest request) {	 
+		
+		//获取时间间隔
+		String timelength =  request.getParameter("timelength") ;
+		Integer  tiemlengthi = Integer.parseInt(timelength);
+		Long nowtime =  System.currentTimeMillis()/1000 ;//精确到秒
+		model.put("vediotimestamp",nowtime.toString());
+		String liveUrL = request.getParameter("liveUrl") ;//URI可以自动转为 URL型的
+		
+		String path = request.getContextPath();
+		String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+		
+		model.put("doloadstatus",basePath+"/rest/downloadbeok?vediotimestamp="+nowtime.toString());
+		
+		//System.out.println("liveUrI:"+liveUrI);//liveUrI:http://43.224.208.195/live/coship,TWSX1422595673115099.m3u8?fmt=x264_0k_mpegts
+		//String liveUrL = URItool.URI2URL(liveUrI);
+		//System.out.println("liveUrL:"+liveUrL);
+		if("".equals(liveUrL) ){
+			//地址转化出现问题  异常
+			return null;  
+		}else{
+	
+			M3u8Download m = new M3u8Download(); //new 出来的 ，里面需要的参数 需要被传进 ，注入不进去的。	
+			String uuids = UUID.randomUUID().toString();	 
+			
+			try {
+				m.m3u8download(liveUrL,srcurl,tsname_length,tiemlengthi,uuids,nowtime, tspojoDao,tslocalstatuspojoDao);
+			} catch (ParseException e) {				
+				e.printStackTrace();
+			}
+			return "inputtitle";  
+						
+		}
+	}
+	
+	
+	
 	
 	
 	@RequestMapping("/toplayvedio")

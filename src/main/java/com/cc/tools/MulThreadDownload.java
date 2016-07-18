@@ -74,7 +74,7 @@ public class MulThreadDownload {
                     accessFile.close();
                     inStream.close();
                 }
-                System.out.println("第"+(threadid+1)+"部分下载完成");
+                //System.out.println("第"+(threadid+1)+"部分下载完成");
             } catch (Exception e) {
                 e.printStackTrace();
             }
