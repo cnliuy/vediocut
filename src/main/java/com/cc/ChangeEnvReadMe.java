@@ -32,7 +32,10 @@ http://127.0.0.1/livex/liveclip?timelength=60&liveUrl=http%3A%2F%2F43.224.208.19
   http://211.148.171.93/vepl/livex/liveclip?timelength=60&liveUrl=http%3A%2F%2F43.224.208.195%2Flive%2Fcoship%2CTWSX1422589417980523.m3u8%3Ffmt%3Dx264_0k_mpegts
   http://211.148.171.93/vepl/livex/liveclip?timelength=50&liveUrl=http%3A%2F%2F43.224.208.195%2Flive%2Fcoship%2CTWSX1422589417980523.m3u8%3Ffmt%3Dx264_0k_mpegts
 	
+  新发起页面
+  http://211.148.171.93/vepl/livex/liveclip4
 	
+
 	视频源地址：
 	http://43.224.208.195/live/coship,TWSX1422589417980523.m3u8?fmt=x264_0k_mpegts
  * 
