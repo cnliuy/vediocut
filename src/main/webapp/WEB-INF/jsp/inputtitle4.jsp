@@ -59,7 +59,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			                }else{
 								consoleInfo();//开始定时任务
 							}				
-						},2500);
+						},6000);
 					
 					//clearInterval(ref);
 				}
@@ -74,7 +74,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
  	<div class="container"> 
  	<div class="hd">		
 	 	<br><br>
-		 <h4 class="page_title" align="center">视频截取</h4><br>
+		 <h4 class="page_title" align="center">小视频截取</h4><br>
 	</div>
 	
 	<div class="bd">

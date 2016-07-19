@@ -8,6 +8,6 @@ public class Someconstant {
 	   
 	   public static final String  srcurl = "http://43.224.208.195/"; 
 	   
-	   public static final int  minustime_cishu = 4; //视频截取期间减去的时间差 
+	   public static final int  minustime_cishu = 7; //视频截取期间减去的时间差 
 	 
 }
