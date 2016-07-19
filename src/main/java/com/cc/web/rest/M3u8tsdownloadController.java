@@ -37,7 +37,7 @@ public class M3u8tsdownloadController {
 	 * http://127.0.0.1:8080/rest/downloadbeok?vediotimestamp=1464231513
 	 * 
 	 * @param  nowtime  ---  vediotimestamp
-	 * 
+	 * @deprecated
 	 * */
 	@RequestMapping("/downloadbeok")
 	public String m3u8downloadbeok(HttpServletRequest request) {
@@ -67,6 +67,8 @@ public class M3u8tsdownloadController {
 	
 	
 	/**
+	 * in using
+	 * 
 	 * 下载ts内容 并显示下载状态
 	 * http://127.0.0.1:8080/rest/tsdownloadstat?timelength=
 	 * 

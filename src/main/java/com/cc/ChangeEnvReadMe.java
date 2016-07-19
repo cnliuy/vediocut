@@ -34,10 +34,38 @@ http://127.0.0.1/livex/liveclip?timelength=60&liveUrl=http%3A%2F%2F43.224.208.19
 	
   新发起页面
   http://211.148.171.93/vepl/livex/liveclip4
+  
+  http://127.0.0.1/livex/liveclip4
 	
 
 	视频源地址：
 	http://43.224.208.195/live/coship,TWSX1422589417980523.m3u8?fmt=x264_0k_mpegts
+	
+	
+	
+ * 5.
+ *   修改其他配置
+ *   
+ *   
+ * 1).    inputtitle4.jsp 文件
+ * 		位置:  \WEB-INF\jsp\inputtitle4.jsp 
  * 
+ * 文件内有控制视频截取长短的设置，搭配链接见后：(  http://127.0.0.1/livex/liveclip4 
+ * 				or 
+ * 				http://211.148.171.93/vepl/livex/liveclip4 )
+ *  
+ * 	33行   “timelength=70” 这个参数 *  更换频道，修改  liveUrl 后面的参数 直播串
+		$.get("<%=path %>/rest/tsdownloadstat?timelength=70&liveUrl=http%3A%2F%2F43.224.208.195%2Flive%2Fcoship%2CTWSX1422589417980523.m3u8%3Ffmt%3Dx264_0k_mpegts",function(data,status){
+	
+	47到62行
+		var ref2 = setInterval(function(){
+		   。。。。
+		},6000);
+	    6000 = 6秒 ，为轮询链接的时间。
+ *  
+ *  
+ *  2).    com.cc.Someconstant
+ *  	系统内部的常量设置
+ *  
  * */
 }

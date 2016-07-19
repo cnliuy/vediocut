@@ -247,8 +247,32 @@ public class M3u8Download {
 	private Integer errflag = 0;
 	
 	private Integer okflag = 1;
+	
     
-    
+	public   List<String> HttpClientGogetM3u8List(String m3u8url){
+		System.out.println("访问一次："+m3u8url);
+    	// 生成一个httpclient对象  
+        CloseableHttpClient httpclient = HttpClients.createDefault();  
+        HttpGet httpget = new HttpGet(m3u8url);      
+        HttpResponse response;
+        List<String> ts_download_list0 = null;
+		try {
+			response = httpclient.execute(httpget);
+	        HttpEntity entity = response.getEntity();  
+	        InputStream in = entity.getContent(); 	          
+	        ts_download_list0 = inputStream2StringNoSharp(in);//去掉相应的#
+		}catch (IOException e){
+			
+		}finally{
+			try {
+				httpclient.close();
+			} catch (IOException e) {				
+				e.printStackTrace();
+			}
+		} 		
+		return ts_download_list0;
+	}
+	
 	/**
 	 * ---- be used
 	 * tsname_length : ts 文件名参数   本例中  TJ2-800-node1_20160429160206_1460079414.ts 为 42
@@ -262,9 +286,9 @@ public class M3u8Download {
     		TslocalstatuspojoDao tslocalstatuspojoDao) throws ParseException  {
     	
     	int  downloadokflag = okflag;
+   
     	
-    	
-
+    	/**
     	// 生成一个httpclient对象  
         CloseableHttpClient httpclient = HttpClients.createDefault();  
         HttpGet httpget = new HttpGet(m3u8url);      
@@ -284,12 +308,29 @@ public class M3u8Download {
 				e.printStackTrace();
 			}
 		} 
-		int tssize = 0 ;
-		if (ts_download_list == null  ){
-			
-		}else{
-			tssize = ts_download_list.size();
-		}
+		*/
+    	int tssize = 0 ;
+    	List<String> ts_download_list = null ;
+    	for ( int httpgetcishu = 0 ; httpgetcishu <Someconstant.httpgeturl_cishu ; httpgetcishu++){
+    		
+    		ts_download_list = HttpClientGogetM3u8List(m3u8url); 
+    		if (ts_download_list == null  ){
+    			tssize = 0 ;
+    			long l = 85*58*58*58*58*58*58;
+    		}else{
+    			tssize = ts_download_list.size();
+    			if(tssize>0){
+    				httpgetcishu = Someconstant.httpgeturl_cishu+10 ;
+    				break;
+    			}else{
+    				
+    			}
+    		}
+    	}
+     	
+		
+		
+
 
 	    
 		if(tssize>0){	        
