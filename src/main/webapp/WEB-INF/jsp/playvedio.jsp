@@ -18,7 +18,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <body>
  	<div class="container"> 	
  		<div class="hd"> 		
-	 		<h4 class="page_title">${vediotitle}:</h4><br>
+	 		<h4 class="page_title">${vediotitle}</h4><br>
 		</div>
 		
 		<div align="center">

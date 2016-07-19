@@ -87,7 +87,8 @@ public class Live2Controller {
 	private int  lineSeparatorlen = lineSeparator.length(); 
 	
 	private int  tsname_length = Someconstant.tsname_length;
-	private String srcurl="http://43.224.208.195/";
+	//private String srcurl="http://43.224.208.195/";
+	private String srcurl=Someconstant.srcurl;
 	
 	/**
 	 * 入口  多线程
@@ -175,6 +176,7 @@ http://211.148.171.93/livex/liveclip?timelength=60&liveUrl=http%3A%2F%2F43.224.2
 	 * 	入口  2	单线程	
 http://127.0.0.1:80/livex/liveclip3?timelength=60&liveUrl=http%3A%2F%2F43.224.208.195%2Flive%2Fcoship%2CTWSX1422589417980523.m3u8%3Ffmt%3Dx264_0k_mpegts
 http://211.148.171.93/livex/liveclip3?timelength=60&liveUrl=http%3A%2F%2F43.224.208.195%2Flive%2Fcoship%2CTWSX1422589417980523.m3u8%3Ffmt%3Dx264_0k_mpegts
+http://211.148.171.93/vepl/livex/liveclip3?timelength=60&liveUrl=http%3A%2F%2F43.224.208.195%2Flive%2Fcoship%2CTWSX1422589417980523.m3u8%3Ffmt%3Dx264_0k_mpegts
 	 
 	 * 
 	 * */
@@ -215,6 +217,27 @@ http://211.148.171.93/livex/liveclip3?timelength=60&liveUrl=http%3A%2F%2F43.224.
 		}
 	}
 	
+	
+	
+	
+	
+	
+	/**
+	 * 	入口  4	单线程	
+http://127.0.0.1:80/livex/liveclip4
+http://211.148.171.93/livex/liveclip3?timelength=60&liveUrl=http%3A%2F%2F43.224.208.195%2Flive%2Fcoship%2CTWSX1422589417980523.m3u8%3Ffmt%3Dx264_0k_mpegts
+http://211.148.171.93/vepl/livex/liveclip3?timelength=60&liveUrl=http%3A%2F%2F43.224.208.195%2Flive%2Fcoship%2CTWSX1422589417980523.m3u8%3Ffmt%3Dx264_0k_mpegts
+	 
+	 * 
+	 * */
+	
+	@RequestMapping("/liveclip4")
+	public String 	productVedioClip4(Map<String, Object> model, HttpServletRequest request) {		
+		Long nowtime =  System.currentTimeMillis()/1000 ;//精确到秒
+		model.put("vediotimestamp",nowtime.toString());
+		return "inputtitle4";  			
+		
+	}
 	
 	
 	
