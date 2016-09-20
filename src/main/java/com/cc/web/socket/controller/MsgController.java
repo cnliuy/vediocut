@@ -15,6 +15,7 @@ public class MsgController {
     public String receiveMsg(String message) throws Exception {
         //Thread.sleep(3000); //simulated delay
         System.out.println("in  MsgController() --- Msg method, message:"+message);
+      
         return message;
     }
     
@@ -22,8 +23,10 @@ public class MsgController {
     @MessageMapping("/signstat")
     @SendTo("/topic/servicemsg")
     //@SendTo("/topic/sign")    , WebSocketSession session ,
-    public String signStat( WebSocketSession session , String message) throws Exception {    		
-        System.out.println("in  MsgController() --- signStat, sessionId: message:"+message);
+    public String signStat( String message) throws Exception {
+    	System.out.println("in  MsgController() --- signStat: message:"+message);
+    	//Thread.sleep(10000); 
+    	message = "{'stat':'ok'}";
         return message;
     }
 }
