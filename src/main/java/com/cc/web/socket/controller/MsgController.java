@@ -14,8 +14,7 @@ public class MsgController {
     @SendTo("/topic/servicemsg")
     public String receiveMsg(String message) throws Exception {
         //Thread.sleep(3000); //simulated delay
-        System.out.println("in  MsgController() --- Msg method, message:"+message);
-      
+        System.out.println("in  MsgController() --- Msg method, message:"+message);      
         return message;
     }
     
