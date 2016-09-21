@@ -15,7 +15,8 @@ public class MutilDownTools {
 	 * */
 	
 	public static String MutilDown(int down_thread_num,String out_file_name ,String srcurl) {
-		//定义几个线程去下载
+				System.out.println("------下载链接： "+srcurl);
+				//定义几个线程去下载
 				int DOWN_THREAD_NUM = down_thread_num;
 				String OUT_FILE_NAME = out_file_name ;
 				InputStream[] isArr = new InputStream[DOWN_THREAD_NUM];
@@ -70,8 +71,10 @@ public class MutilDownTools {
 					//OUT_FILE_NAME ="";
 					if("".equals(OUT_FILE_NAME)||OUT_FILE_NAME==null){
 						System.out.println("--------下载Err：null file---");
+						OUT_FILE_NAME="";
 					}else{
 						System.out.println("--------下载Err：---"+OUT_FILE_NAME+"---");
+						OUT_FILE_NAME="";
 					}
 					ex.printStackTrace();
 					

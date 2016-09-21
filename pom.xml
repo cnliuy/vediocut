@@ -124,6 +124,13 @@
 		  <version>4.5.2</version>
 		</dependency>
 		
+		<!-- jackson 解析json串 -->
+    	<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-core-asl</artifactId>
+			<version>1.9.13</version>
+		</dependency>
+		
 	</dependencies>
 	
 	<build>

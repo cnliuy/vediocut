@@ -327,12 +327,8 @@ public class M3u8Download {
     			}
     		}
     	}
-     	
-		
-		
-
-
-	    
+    	
+    	
 		if(tssize>0){	        
 	       	List<String> in_filenames = new ArrayList<String>();
 	       	String tmpurl ;	        
@@ -416,9 +412,9 @@ public class M3u8Download {
 	        	Date tmpdate = new Date(tmpdatal);
 	        	String tmpdataString = df.format(tmpdate);	        	
 	        	Integer tmpseqi = Integer.parseInt(seq_ok_String)-seqdiff*j;
-	        	//System.out.println("--------"+tmpdataString);//20160523170146
-	        	//System.out.println("-----------"+tmpseqi);//1460494861	        
-	        	//System.out.println("----ts name----"+ ts_name_ok_suffix+suffix_ok_String+"_"+tmpdataString+"_"+tmpseqi+".ts");	
+	        	//System.out.println("--||--------"+tmpdataString);//20160523170146
+	        	//System.out.println("--||-----------"+tmpseqi);//1460494861	        
+	        	//System.out.println("--||----ts name----"+ ts_name_ok_suffix+suffix_ok_String+"_"+tmpdataString+"_"+tmpseqi+".ts");	
 	        	//----ts name----/live/live2/TJ2/800/TJ2-800-node1_20160523170911_1460494950.ts
 	        	String tmptsname = suffix_ok_String+"_"+tmpdataString+"_"+tmpseqi+".ts";
 	        	String tmpurl_ =  srcurl+ts_name_ok_suffix+tmptsname;
@@ -456,6 +452,18 @@ public class M3u8Download {
 	        		//新文件需要下载 
 		        	//下载保存文件
 					String oofilename = MutilDownTools.MutilDown(Someconstant.download_threads, destfilePath+File.separator+tsp.getName(),tsp.getDownloadurl() ); //下载完成               
+					//再下一次
+					if("".equals(oofilename)){
+						System.out.println("又下一次----"+tsp.getName());
+						oofilename = MutilDownTools.MutilDown(Someconstant.download_threads, destfilePath+File.separator+tsp.getName(),tsp.getDownloadurl() ); 
+					}
+					if("".equals(oofilename)){
+						System.out.println("第三次下----"+tsp.getName());
+						oofilename = MutilDownTools.MutilDown(Someconstant.download_threads, destfilePath+File.separator+tsp.getName(),tsp.getDownloadurl() ); 
+					} 
+
+					
+					
 					if("".equals(oofilename)){
 						//出现了问题 不做保存
 					}else{
@@ -475,7 +483,7 @@ public class M3u8Download {
 	        downloadokflag = okflag;
 		}else{
 			System.out.println("======================== tssize = "+tssize+", 下载失败 0 err  =====================");
-			 downloadokflag = errflag;
+			downloadokflag = errflag;
 			
 		}
 		
@@ -487,23 +495,7 @@ public class M3u8Download {
     
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-        
-        
+         
     /**
      * 过滤掉#
      * 
@@ -526,7 +518,11 @@ public class M3u8Download {
             return list;        
 	} 
         
-        
+    /***
+     * 视频文件下载的存储路径
+     * 
+     * 
+     * */
 	public static String GoGetFileSavePath(){
         	//下载后切片放置的目录
         	String destFilePath="F:"+File.separator+"Java2016"+File.separator+"src"+File.separator+"vediocut"+
@@ -551,7 +547,7 @@ public class M3u8Download {
         	
         	//---服务器的地址 tomcat new--
         	//C:\Java\apache-tomcat-8.0.36\webapps //------- 
-        	destFilePath="C:"+File.separator+"Java"+File.separator+"apache-tomcat-8.0.36"+File.separator+"webapps"+File.separator+"vepl"+File.separator+"live"+File.separator+"live2"+File.separator+"TJ2"+File.separator+"800"; 
+         	destFilePath="C:"+File.separator+"Java"+File.separator+"apache-tomcat-8.0.36"+File.separator+"webapps"+File.separator+"vepl"+File.separator+"live"+File.separator+"live2"+File.separator+"TJ2"+File.separator+"800"; 
 
         	//---服务器的地址
         	//---C:\Java\vediosrc_git\vediocut\src\main\webapp\live\live2\TJ2\800

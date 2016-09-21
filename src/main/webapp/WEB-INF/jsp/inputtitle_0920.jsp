@@ -14,64 +14,63 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<link rel="stylesheet" href="<%=path %>/css/jquery-weui.min.css">
 	<script src="<%=path %>/js/jquery/jquery-2.2.4.min.js"></script>
 	<script src="<%=path %>/js/jquery/jquery-weui.min.js"></script>
-	
-	<script src="<%=path %>/js/sockjs-0.3.4.js"></script>
-    <script src="<%=path %>/js/stomp.js"></script>	
     <link rel="stylesheet" href="<%=path %>/css/example.css"/>
     
-    <script type="text/javascript">
-    var stompClient = null;
-    
-	callback = function(message) {    
-   	 //alert(message);
-       if (message.body) {
-		//alert("got message with body " + message.body);
-		$("#p1").hide();
-		$("#vediocutbutton").attr({"disabled":"disabled"});
-		$("#vediocutbutton").removeClass("weui_btn weui_btn_plain_primary").addClass("weui_btn weui_btn_disabled weui_btn_default");
-		//$("#vediocutbutton").attr({"class":"weui_btn weui_btn_disabled weui_btn_default"});
-		$("#submitbutton").show();
-		$("#p2").prepend("视频截取完成,您可以分享朋友圈了");
-       } else {
-		alert("got empty message");
-       }
-	};
-
-	function connect() {
-		$("#p1").prepend("视频截取中。。。请稍候");
+	
+	<script>
+		var  downloadstat = 0;
 		
-		var socket = new SockJS('/receivemsg');
-		stompClient = Stomp.over(socket);              
-		stompClient.connect('', '', function(frame) {  
-		//stompClient.connect({}, function(frame) {
-       		console.log('*****  Connected  *****');  
-			console.log('Connected: ' + frame);
-        	stompClient.subscribe("/topic/servicemsg", callback);
-        	//{ "firstName":"Bill" , "lastName":"Gates" }
-        	stompClient.send("/app/tsdownloadstat2ws", {}, JSON.stringify({'timelength':'70', 'liveUrl':'http%3A%2F%2F43.224.208.195%2Flive%2Fcoship%2CTWSX1422589417980523.m3u8%3Ffmt%3Dx264_0k_mpegts'}));
-   		});
-		//alert(3);
-		
-		
-	}   
-		
-    function disconnect() {
-    	$("#submitbutton").hide();
-
-        if (stompClient != null) {
-            stompClient.disconnect();
-        }
-        console.log("Disconnected");       
-        
-    }
+		$(document).ready(
+			function() {
+			 $("#submitbutton").hide();
+			 $("#vediocutbutton").click(
+			
+				 function(){	
+						
+					 	$("#p1").prepend("视频截取中。。。请稍候");
+					 	var ref2 = "";
+					 	
+						function consoleInfo(){	
+							//alert("。。。");	
+							$.get("<%=path %>/rest/downloadbeok?vediotimestamp=${vediotimestamp}",function(data,status){
+								if(data=="1"){
+									//alert("视频截取成功");
+									downloadstat =1 ;
+								}
+								if(data=="0"){
+									//alert("视频截取中，请稍等。。。");
+								}
+							});
+						}
+					
+						//开始和结束定时任务 
+						var ref2 = setInterval(function(){
+							
+				           	if(downloadstat == 1){ 	
+				           		$("#p1").hide();
+				           		//$("#vediocutbutton").hide();
+				           		$("#vediocutbutton").attr({"disabled":"disabled"});
+				           		$("#vediocutbutton").removeClass("weui_btn weui_btn_plain_primary").addClass("weui_btn weui_btn_disabled weui_btn_default");
+				           		//$("#vediocutbutton").attr({"class":"weui_btn weui_btn_disabled weui_btn_default"});
+				           		$("#submitbutton").show();
+				        	    $("#p2").prepend("视频截取完成,您可以分享朋友圈了");
+				        	    clearInterval(ref2); //结束定时任务  			        	    
+			                    //alert("视频截取成功");
+			                }else{
+								consoleInfo();//开始定时任务
+							}				
+						},2500);
+					
+					//clearInterval(ref);
+				}
+			);
+		});
 	</script>
-	
-	
 	
 	
 </head>
 
-<body onload="disconnect()">
+<body>
  	<div class="container"> 
  	<div class="hd">		
 	 	<br><br>
@@ -104,8 +103,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	    
 		<div class="weui_btn_area">     	
 		      <input id="vediocutbutton" name="vediocutbutton"  type="button"  value="截取视频"
-			       			class="weui_btn weui_btn_primary"  onclick="connect();"/>	
-    			     
+			       			class="weui_btn weui_btn_primary"/>	     
 		      <input id="submitbutton" name="submit"  type="submit"  
 			      			value="分享视频到朋友圈" class="weui_btn weui_btn_primary"/> 
 		 </div> 

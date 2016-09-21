@@ -91,4 +91,7 @@ Caused by: java.lang.LinkageError: loader constraint violation: when resolving m
 ----------------------
 
 ---------------------------------
+###版本0.12.2
+ 	socket2.html 前后端通信 
+   
 --EOF--

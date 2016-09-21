@@ -97,7 +97,7 @@ public class Live2Controller {
 	 *  异步下载ts切片
 	 * 
 	 * 生成 m3u8 串 
-http://127.0.0.1:8080/livex/liveclip?liveUrl=http%3A%2F%2F43.224.208.195%2Flive%2Fcoship%2CTWSX1422595673115099.m3u8%3Ffmt%3Dx264_0k_mpegts&timelength=60
+http://127.0.0.1:8080/livex/liveclip0?liveUrl=http%3A%2F%2F43.224.208.195%2Flive%2Fcoship%2CTWSX1422595673115099.m3u8%3Ffmt%3Dx264_0k_mpegts&timelength=60
 http://127.0.0.1:8080/livex/TJ2-800-vedioclip.m3u8?timelength=60&timestamp=1462331693523
 http%3A%2F%2F43.224.208.195%2Flive%2Fcoship%2CTWSX1422589417980523.m3u8%3Ffmt%3Dx264_0k_mpegts  天津1 
 http://43.224.208.195/live/coship,TWSX1422589417980523.m3u8?fmt=x264_0k_mpegts
@@ -118,8 +118,8 @@ http://211.148.171.93/livex/liveclip?timelength=60&liveUrl=http%3A%2F%2F43.224.2
 	 * 
 	 * */
 
-	@RequestMapping("/liveclip")
-	public Callable<String> 	productVedioClip(Map<String, Object> model, HttpServletRequest request) {	 
+	@RequestMapping("/liveclip0")
+	public Callable<String> 	productVedioClip0(Map<String, Object> model, HttpServletRequest request) {	 
 		 
 		//获取时间间隔
 		String timelength =  request.getParameter("timelength") ;
@@ -139,12 +139,7 @@ http://211.148.171.93/livex/liveclip?timelength=60&liveUrl=http%3A%2F%2F43.224.2
 		if("".equals(liveUrL) ){
 			//地址转化出现问题  异常
 			return null;  
-		}else{
-	
-			
-
-
-				
+		}else{				
 	        return new Callable<String>() {  
 	            public String call() throws Exception {  
 	            	String uuids = UUID.randomUUID().toString();	            	
@@ -169,6 +164,28 @@ http://211.148.171.93/livex/liveclip?timelength=60&liveUrl=http%3A%2F%2F43.224.2
 	}
 	
 	
+	/**
+	 * 只是一个简单的跳转 跳转到 inputtitle.jsp页面
+	 * 
+	 * */	
+	@RequestMapping("/liveclip")
+	public  String 	productVedioClip(Map<String, Object> model, HttpServletRequest request) {
+		//获取时间间隔
+		String timelength =  request.getParameter("timelength") ;
+		Integer  tiemlengthi = Integer.parseInt(timelength);
+		Long nowtime =  System.currentTimeMillis()/1000 ;//精确到秒
+		model.put("vediotimestamp",nowtime.toString());
+		String liveUrL = request.getParameter("liveUrl") ;//URI可以自动转为 URL型的		
+		//String path = request.getContextPath();
+		//String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";		
+		//model.put("doloadstatus",basePath+"/rest/downloadbeok?vediotimestamp="+nowtime.toString());
+		if("".equals(liveUrL) ){
+			//地址转化出现问题  异常
+			return null;  
+		}else{			
+			return "inputtitle"; 					
+		}
+	}	 
 	
 	
 	

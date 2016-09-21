@@ -14,6 +14,7 @@ public class WebSocketConfig extends AbstractWebSocketMessageBrokerConfigurer {
 	public void configureMessageBroker(MessageBrokerRegistry config) {
 		config.enableSimpleBroker("/topic");
 		config.setApplicationDestinationPrefixes("/app"); //目的地的 前缀
+		//config.setUserDestinationPrefix("/ws-user/");  
 	}
 
 	//@Override

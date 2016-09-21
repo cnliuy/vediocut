@@ -49,12 +49,13 @@ public class URItool {
 	
 	public static String URI2URL(String URIString) {		 
 	    URI uri;
-	    String urlstring = "http://43.224.208.195/live/coship,TWSX1422589417980523.m3u8?fmt=x264_0k_mpegts";
+	    //String urlstring = "http://43.224.208.195/live/coship,TWSX1422589417980523.m3u8?fmt=x264_0k_mpegts";
+	    String urlstring = "";
 		try {
 			uri = new URI(URIString);
 			urlstring = uri.getPath() ;  //解码  
-			System.out.println("==============="+URIString);
-			System.out.println("==============="+urlstring);
+			//System.out.println("==============="+URIString);
+			//System.out.println("==============="+urlstring);
 		    //打印的内容：  http://43.224.208.195/live/coship,TWSX1422595673115099.m3u8?fmt=x264_0k_mpegts
 		} catch (URISyntaxException e) {		
 			e.printStackTrace();

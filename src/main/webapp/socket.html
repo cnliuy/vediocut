@@ -6,6 +6,8 @@
     <script src="../js/stomp.js"></script>
     <script type="text/javascript">
         var stompClient = null;
+        var timestamp = Date.parse(new Date());
+        
         
         function setConnected(connected) {
             document.getElementById('connect').disabled = connected;
@@ -20,6 +22,9 @@
             stompClient.connect({}, function(frame) {
                 setConnected(true);
                 console.log('Connected: ' + frame);
+               
+                //subscribeWithId(stompClient,timestamp);
+                
                 stompClient.subscribe('/topic/servicemsg', function(greeting){
                     //showGreeting(JSON.parse(greeting.body).content);
                     showGreeting(greeting.body);
@@ -27,6 +32,17 @@
             });
         }
         
+        
+        /**
+         * subscribe at the url with the userid
+         **/
+		//function subscribeWithId(stompClient,id){
+    	//	stompClient.subscribe('/ws-user/'+id+'/greetings', function(){
+        //	showNotify();
+    	//});
+    	
+
+    	
         function disconnect() {
             if (stompClient != null) {
                 stompClient.disconnect();
@@ -37,7 +53,16 @@
         
         function sendName() {
             var name = document.getElementById('name').value;
-            stompClient.send("/app/signstat", {}, JSON.stringify({'name': name}));
+            stompClient.send("/app/signstat0", {}, JSON.stringify({'name': name}));
+        }
+        
+        
+        function sendName2() {
+        	stompClient.subscribe('/topic/servicemsg'+timestamp, function(greeting){
+                   showGreeting(greeting.body);
+            });
+        	var name = document.getElementById('name').value;
+            stompClient.send("/app/signstatuser", {}, JSON.stringify({'name': name,'timestamp':timestamp}));
         }
         
         function showGreeting(message) {
@@ -60,6 +85,7 @@
     <div id="conversationDiv">
         <label>What is your name?</label><input type="text" id="name" />
         <button id="sendName" onclick="sendName();">Send</button>
+        <button id="sendName2" onclick="sendName2();">Send2</button>
         <p id="response"></p>
     </div>
 </div>
