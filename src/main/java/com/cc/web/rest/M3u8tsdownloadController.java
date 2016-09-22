@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -96,6 +97,7 @@ public class M3u8tsdownloadController {
 		String timelength =  request.getParameter("timelength") ;
 		Integer  tiemlengthi = Integer.parseInt(timelength);
 		
+		String vediochannel =  request.getParameter("vediochannel") ;
 		String liveUrL = request.getParameter("liveUrl") ;//URI可以自动转为 URL型的
 		System.out.println("liveUrL:"+liveUrL);
 		String path = request.getContextPath();
@@ -103,14 +105,14 @@ public class M3u8tsdownloadController {
 				
 
 		Integer  returnflag = errflag ;  // errflag okflag
-		if("".equals(liveUrL) ){
+		if("".equals(liveUrL) ||"".equals(vediochannel)){
 			//地址转化出现问题  异常
 			return returnflag.toString();  
 		}else{
 			M3u8Download m = new M3u8Download(); //new 出来的 ，里面需要的参数 需要被传进 ，注入不进去的。	
 			String uuids = UUID.randomUUID().toString();					
 			try {
-				returnflag = m.m3u8download3(liveUrL,srcurll,tsname_length,tiemlengthi,uuids, tspojoDao,tslocalstatuspojoDao);
+				returnflag = m.m3u8download3(liveUrL,srcurll,tsname_length,tiemlengthi,uuids,vediochannel, tspojoDao,tslocalstatuspojoDao);
 			} catch (ParseException e) {				
 				e.printStackTrace();
 			}
@@ -120,8 +122,13 @@ public class M3u8tsdownloadController {
 
 	}
 	
-	
-	
+	/*************** 一对一 start *****************/
+    public SimpMessagingTemplate simpMessagingTemplate; 
+    
+    @Autowired  
+    public M3u8tsdownloadController(SimpMessagingTemplate simpMessagingTemplate) {  
+        this.simpMessagingTemplate = simpMessagingTemplate;  
+    }
 	
 	
 	/**
@@ -142,20 +149,23 @@ public class M3u8tsdownloadController {
 	 * 
 	 * */
 	@MessageMapping("/tsdownloadstat2ws") 
-    @SendTo("/topic/servicemsg")
-	public String m3u8tsdownloadstat2_websocket( String message ) {
+    //@SendTo("/topic/servicemsg")
+	public void m3u8tsdownloadstat2_websocket( String message ) {
 		System.out.println("-----in  M3u8tsdownloadController() --- m3u8tsdownloadstat2_websocket: message:"+message);
 		//获取时间间隔
 		ObjectMapper mapper = new ObjectMapper();  
-		Map map;
-		
+		Map map;		
 		String timelength = Someconstant.def_timelengths;
 		Integer  tiemlengthi =Someconstant.def_timelength;
 		String liveUrL = "";//URI可以自动转为 URL型的
+		String vediochannel = "";
+		String timestampws ="";
 		try {
 			//{'timelength':'70', 'liveUrl':'http%3A%2F%2F43.224.208.195%2Flive%2Fcoship%2CTWSX1422589417980523.m3u8%3Ffmt%3Dx264_0k_mpegts'}));
 	        map = mapper.readValue(message, Map.class);
-			//System.out.println(map.get("timelength") + ":" + map.get("liveUrl")); 			
+			//System.out.println(map.get("timelength") + ":" + map.get("liveUrl")); 
+	        vediochannel= (String)map.get("vediochannel");
+	        timestampws=((Long)map.get("timestampws")).toString() ;
 			timelength =  (String) map.get("timelength") ;
 			tiemlengthi = Integer.parseInt(timelength);
 			
@@ -169,28 +179,28 @@ public class M3u8tsdownloadController {
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
-		
-
 		//String path = request.getContextPath();
 		//String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
-				
-
 		Integer  returnflag = errflag ;  // errflag okflag
-		if("".equals(liveUrL) ){
+		//String  returnmsg = "{'returnmsg':'err'}";
+		if("".equals(liveUrL) || "".equals(vediochannel)){
 			//地址转化出现问题  异常
-			return returnflag.toString();  
+			//return returnflag.toString();  
+			simpMessagingTemplate.convertAndSend("/topic/servicemsg" + timestampws+vediochannel, returnflag.toString());
 		}else{
 			M3u8Download m = new M3u8Download(); //new 出来的 ，里面需要的参数 需要被传进 ，注入不进去的。	
 			String uuids = UUID.randomUUID().toString();					
 			try {
-				returnflag = m.m3u8download3(liveUrL,srcurll,tsname_length,tiemlengthi,uuids, tspojoDao,tslocalstatuspojoDao);
+				returnflag = m.m3u8download3(liveUrL,srcurll,tsname_length,tiemlengthi,uuids,vediochannel, tspojoDao,tslocalstatuspojoDao);
 			} catch (ParseException e) {				
 				e.printStackTrace();
 			}
-			return returnflag.toString();
-								
+			//return returnflag.toString();
+			simpMessagingTemplate.convertAndSend("/topic/servicemsg" + timestampws+vediochannel, returnflag.toString());								
 		}
 
 	}
 	
+	
+	/*************** 一对一 end *****************/
 }

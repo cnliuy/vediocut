@@ -21,19 +21,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     
     <script type="text/javascript">
     var stompClient = null;
+    var timestamp = Date.parse(new Date());
     
 	callback = function(message) {    
-   	 //alert(message);
-       if (message.body) {
-		//alert("got message with body " + message.body);
-		$("#p1").hide();
-		$("#vediocutbutton").attr({"disabled":"disabled"});
-		$("#vediocutbutton").removeClass("weui_btn weui_btn_plain_primary").addClass("weui_btn weui_btn_disabled weui_btn_default");
-		//$("#vediocutbutton").attr({"class":"weui_btn weui_btn_disabled weui_btn_default"});
-		$("#submitbutton").show();
-		$("#p2").prepend("视频截取完成,您可以分享朋友圈了");
+   	   //alert("message---"+message);
+   	   //alert("message.body---"+message.body);
+       if (message.body == 1) {
+			//alert("got message with body " + message.body);
+			$("#p1").hide();
+			$("#vediocutbutton").attr({"disabled":"disabled"});
+			$("#vediocutbutton").removeClass("weui_btn weui_btn_plain_primary").addClass("weui_btn weui_btn_disabled weui_btn_default");
+			//$("#vediocutbutton").attr({"class":"weui_btn weui_btn_disabled weui_btn_default"});
+			$("#submitbutton").show();
+			$("#p2").prepend("视频截取完成,您可以分享朋友圈了");
        } else {
-		alert("got empty message");
+			alert("参数错误 请刷新");
        }
 	};
 
@@ -46,9 +48,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		//stompClient.connect({}, function(frame) {
        		console.log('*****  Connected  *****');  
 			console.log('Connected: ' + frame);
-        	stompClient.subscribe("/topic/servicemsg", callback);
-        	//{ "firstName":"Bill" , "lastName":"Gates" }
-        	stompClient.send("/app/tsdownloadstat2ws", {}, JSON.stringify({'timelength':'70', 'liveUrl':'http%3A%2F%2F43.224.208.195%2Flive%2Fcoship%2CTWSX1422589417980523.m3u8%3Ffmt%3Dx264_0k_mpegts'}));
+			
+        	stompClient.subscribe("/topic/servicemsg"+timestamp+'${vediochannel}', callback);
+        	//{ "firstName":"Bill" , "lastName":"Gates" } in M3u8tsdownloadController
+        	stompClient.send("/app/tsdownloadstat2ws", {}, JSON.stringify({'vediochannel':'${vediochannel}','timestampws':timestamp,'timelength':'70', 'liveUrl':'http%3A%2F%2F43.224.208.195%2Flive%2Fcoship%2CTWSX1422589417980523.m3u8%3Ffmt%3Dx264_0k_mpegts'}));
    		});
 		//alert(3);
 		

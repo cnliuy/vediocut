@@ -278,10 +278,11 @@ public class M3u8Download {
 	 * tsname_length : ts 文件名参数   本例中  TJ2-800-node1_20160429160206_1460079414.ts 为 42
 	 * timegap : 截取的视频时长   精确到秒
 	 * uuids ：鉴别符号
+	 * vediochannel : 频道存储的位置。  如 live_live2_TJ2_800 表示存贮这个位置  ( 注意  现阶段未用到  ，)
 	 * @throws ParseException 
 	 * @Return  int  1  ok  ,0 err
 	 * */
-    public int m3u8download3(String m3u8url ,String srcurl,int tsname_length , int timegap ,String uuids,
+    public int m3u8download3(String m3u8url ,String srcurl,int tsname_length , int timegap ,String uuids,String vediochannel,
     		TspojoDao tspojoDao,
     		TslocalstatuspojoDao tslocalstatuspojoDao) throws ParseException  {
     	
@@ -396,7 +397,7 @@ public class M3u8Download {
 					}	
 	        	}             
 	        }
-	        
+	       
 	        Long timediff_s = timediff/1000; //转为秒
 	        int  timediff_s_i = timediff_s.intValue();
 	        int ts_number = timegap /timediff_s_i  ; //需要ts 切片的个数 

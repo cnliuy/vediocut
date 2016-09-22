@@ -35,7 +35,7 @@ import com.cc.tools.URItool;
  * 视频截取 播放 类2  新   在用
  * 
  * 
-http://127.0.0.1:80/livex/liveclip?timelength=60&liveUrl=http%3A%2F%2F43.224.208.195%2Flive%2Fcoship%2CTWSX1422589417980523.m3u8%3Ffmt%3Dx264_0k_mpegts
+http://127.0.0.1:80/livex/liveclip?vediochannel=live_live2_TJ2_800&timelength=60&liveUrl=http%3A%2F%2F43.224.208.195%2Flive%2Fcoship%2CTWSX1422589417980523.m3u8%3Ffmt%3Dx264_0k_mpegts
 
 http://10.0.0.35:8080/livex/liveclip?timelength=60&liveUrl=http%3A%2F%2F43.224.208.195%2Flive%2Fcoship%2CTWSX1422589417980523.m3u8%3Ffmt%3Dx264_0k_mpegts
 
@@ -167,14 +167,19 @@ http://211.148.171.93/livex/liveclip?timelength=60&liveUrl=http%3A%2F%2F43.224.2
 	/**
 	 * 只是一个简单的跳转 跳转到 inputtitle.jsp页面
 	 * 
+	 * vediochannel
+	 * 
 	 * */	
 	@RequestMapping("/liveclip")
 	public  String 	productVedioClip(Map<String, Object> model, HttpServletRequest request) {
+		//获取频道类型
+		String vediochannel =  request.getParameter("vediochannel") ;
 		//获取时间间隔
 		String timelength =  request.getParameter("timelength") ;
 		Integer  tiemlengthi = Integer.parseInt(timelength);
 		Long nowtime =  System.currentTimeMillis()/1000 ;//精确到秒
 		model.put("vediotimestamp",nowtime.toString());
+		model.put("vediochannel",vediochannel);
 		String liveUrL = request.getParameter("liveUrl") ;//URI可以自动转为 URL型的		
 		//String path = request.getContextPath();
 		//String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";		
@@ -258,7 +263,7 @@ http://211.148.171.93/vepl/livex/liveclip3?timelength=60&liveUrl=http%3A%2F%2F43
 	
 	
 	
-	
+	123
 	@RequestMapping("/toplayvedio")
 	public  String playm3u8(Map<String, Object> model, HttpServletRequest request) {
 		String vediotimestamp =  request.getParameter("vediotimestamp") ;
