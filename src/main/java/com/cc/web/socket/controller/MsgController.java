@@ -83,9 +83,7 @@ public class MsgController {
     @SendToUser("/topic/servicemsg")    
     //@SendTo("/topic/sign")    , WebSocketSession session ,,HttpServletRequest request
     public String signStat0( String message ) throws Exception {
-    	System.out.println("in  MsgController() --- signStat: message:"+message); 
-    	
-    	
+    	System.out.println("in  MsgController() --- signStat: message:"+message);    	
     	message = "{'stat':'ok'}";
         return message;
     }
