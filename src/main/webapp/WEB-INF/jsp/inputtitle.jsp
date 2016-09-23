@@ -88,7 +88,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					  <div class="weui_cell">	
 					  	<div class="weui_cell_hd">		  
 					  	<input type="hidden" name="vediotimestamp"  value="${vediotimestamp}" />
-					  	
+					  	<input type="hidden" name="vediochannel"  value="${vediochannel}" />
 					  	</div>					  	
 					  </div>
 					  <div class="weui_cell">	

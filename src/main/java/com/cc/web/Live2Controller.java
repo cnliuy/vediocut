@@ -179,7 +179,7 @@ http://211.148.171.93/livex/liveclip?timelength=60&liveUrl=http%3A%2F%2F43.224.2
 		Integer  tiemlengthi = Integer.parseInt(timelength);
 		Long nowtime =  System.currentTimeMillis()/1000 ;//精确到秒
 		model.put("vediotimestamp",nowtime.toString());
-		model.put("vediochannel",vediochannel);
+		model.put("vediochannel",vediochannel);		
 		String liveUrL = request.getParameter("liveUrl") ;//URI可以自动转为 URL型的		
 		//String path = request.getContextPath();
 		//String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";		
@@ -263,18 +263,21 @@ http://211.148.171.93/vepl/livex/liveclip3?timelength=60&liveUrl=http%3A%2F%2F43
 	
 	
 	
-	123
+
 	@RequestMapping("/toplayvedio")
 	public  String playm3u8(Map<String, Object> model, HttpServletRequest request) {
 		String vediotimestamp =  request.getParameter("vediotimestamp") ;
 		String title = request.getParameter("title") ;
+		String vediochannel = request.getParameter("vediochannel") ;
+		
 		System.out.println("vediotimestamp:"+vediotimestamp+"   -----     title:"+title);
 		
 		String path = request.getContextPath();
 		String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 		
 		//String m3u8str = "http://"+ipaddress+":"+ipport+"/livex/TJ2-800-vedioclip.m3u8?timelength=60&vediotimestamp="+vediotimestamp;
-		String m3u8str = basePath+"/livex/TJ2-800-vedioclip.m3u8?timelength=60&vediotimestamp="+vediotimestamp;
+		//此处不需要调整  ，由  vediochannel 控制频道的变换。 
+		String m3u8str = basePath+"/livex/TJ2-800-vedioclip.m3u8?timelength=60&vediotimestamp="+vediotimestamp+"&vediochannel="+vediochannel;
 		
 		//model.put("m3u8str","http://"+ipaddress+":"+ipport+"/livex/TJ2-800-vedioclip.m3u8?timelength=60&vediotimestamp="+vediotimestamp);
 		//model.put("vediotitle",title);
@@ -321,7 +324,9 @@ http://211.148.171.93/vepl/livex/liveclip3?timelength=60&liveUrl=http%3A%2F%2F43
 
 	@RequestMapping("/TJ2-800-vedioclip.m3u8")
 	public String 	productm3u8(Map<String, Object> model, HttpServletRequest request) {	 
-		String timestamp = request.getParameter("vediotimestamp") ;		
+		String timestamp = request.getParameter("vediotimestamp") ;	
+		String vediochannel = request.getParameter("vediochannel") ;
+		
 		Long timestampl = Long.parseLong(timestamp.trim()) ; //精确到秒
 		
 		String path = request.getContextPath();
@@ -348,8 +353,13 @@ http://211.148.171.93/vepl/livex/liveclip3?timelength=60&liveUrl=http%3A%2F%2F43
 		Integer  tiemlengthi = Integer.parseInt(timelength);		
 		int tscount = tiemlengthi/ts_per_time;		 
 		tspojo_tstimesecond_start = tspojo_tstimesecond_end- tiemlengthi;	
-		System.out.println(tspojo_tstimesecond_start + "------------"+tspojo_tstimesecond_end);
-		List<Tspojo> tspojos= tspojoDao.findDistinctNameByTstimesecondBetweenOrderByIdAsc(tspojo_tstimesecond_start, tspojo_tstimesecond_end);
+		System.out.println(tspojo_tstimesecond_start + "------------"+tspojo_tstimesecond_end);123
+		/**
+		 * 增加   频道 pindaostr （数据库）和 vediochannel（入参 ） 的对应关系 
+		 * 将 vediochannel 对应为相应的 pindaostr串
+		 * */
+		String pindaoStr = "TJ2-800-node1";
+		List<Tspojo> tspojos= tspojoDao.findDistinctNameByTstimesecondBetweenOrderByIdAsc(tspojo_tstimesecond_start, tspojo_tstimesecond_end,pindaoStr);
 		Iterator<Tspojo> tspojosi = tspojos.iterator();
 		String pageReturnStr4 = "" ;		 
 		String pageReturnStr4_part2 = "" ;
