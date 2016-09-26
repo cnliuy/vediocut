@@ -12,8 +12,10 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import com.cc.dao.TspojoDao;
+import com.cc.dao.TvchannelpindaopojoDao;
 import com.cc.entity.Tspojo;
 import com.cc.tools.DataConvertTools;
+import com.cc.webtool.ToolsClazz;
 
 
 /**
@@ -25,6 +27,10 @@ import com.cc.tools.DataConvertTools;
 public class LiveController {
 	@Autowired
 	private TspojoDao tspojoDao;
+	
+	@Autowired
+	private TvchannelpindaopojoDao tvchannelpindaopojoDao;
+	
 	
 	private Integer ts_per_time = 5; //ts 视频切片的间隔 5秒
 	
@@ -53,6 +59,7 @@ public class LiveController {
 	public String 	productVedioClip(Map<String, Object> model, HttpServletRequest request) {	 
 		String timestamp = request.getParameter("timestamp") ;		
 		Long timestampl = DataConvertTools.TimestampStringToTimestampLong(timestamp) ; //精确到秒
+		String vediochannel = request.getParameter("vediochannel") ;
 		Integer iii=timestampl.intValue()/10;
 		iii=iii*10;
 		System.out.println("iii:"+iii);
@@ -75,7 +82,9 @@ public class LiveController {
 		int tscount = tiemlengthi/ts_per_time;		 
 		tspojo_tstimesecond_end = tspojo_tstimesecond_start+ tiemlengthi;	
 		System.out.println(tspojo_tstimesecond_start + "------------"+tspojo_tstimesecond_end);
-		List<Tspojo> tspojos= tspojoDao.findDistinctNameByTstimesecondBetweenOrderByIdAsc(tspojo_tstimesecond_start, tspojo_tstimesecond_end);
+		
+		String pindaoStr = ToolsClazz.GogetPindaoStr(vediochannel, tvchannelpindaopojoDao);// "TJ2-800-node1"; 默认的
+		List<Tspojo> tspojos= tspojoDao.findDistinctNameByTstimesecondBetweenOrderByIdAsc(tspojo_tstimesecond_start, tspojo_tstimesecond_end,pindaoStr);
 		Iterator<Tspojo> tspojosi = tspojos.iterator();
 		String pageReturnStr4 = "" ;		 
 		String pageReturnStr4_part2 = "" ;
@@ -150,7 +159,10 @@ public class LiveController {
 		int tscount = tiemlengthi/ts_per_time;		 
 		tspojo_tstimesecond_end = tspojo_tstimesecond_start+ tiemlengthi;	
 		System.out.println(tspojo_tstimesecond_start + "------------"+tspojo_tstimesecond_end);
-		List<Tspojo> tspojos= tspojoDao.findDistinctNameByTstimesecondBetweenOrderByIdAsc(tspojo_tstimesecond_start, tspojo_tstimesecond_end);
+		/***/
+		String vediochannel = request.getParameter("vediochannel") ;
+		String pindaoStr = ToolsClazz.GogetPindaoStr(vediochannel, tvchannelpindaopojoDao);// "TJ2-800-node1"; 默认的
+		List<Tspojo> tspojos= tspojoDao.findDistinctNameByTstimesecondBetweenOrderByIdAsc(tspojo_tstimesecond_start, tspojo_tstimesecond_end,pindaoStr);
 		Iterator<Tspojo> tspojosi = tspojos.iterator();
 		String pageReturnStr = "" ;
 		String pageReturnStr_part1 = "" ;

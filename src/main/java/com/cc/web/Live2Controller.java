@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.cc.Someconstant;
 import com.cc.dao.TslocalstatuspojoDao;
 import com.cc.dao.TspojoDao;
+import com.cc.dao.TvchannelpindaopojoDao;
 import com.cc.dao.VediocutpojoDao;
 import com.cc.entity.Tspojo;
 import com.cc.entity.Vediocutpojo;
@@ -26,6 +27,7 @@ import com.cc.tools.DataConvertTools;
 import com.cc.tools.DownloadThread;
 import com.cc.tools.M3u8Download;
 import com.cc.tools.URItool;
+import com.cc.webtool.ToolsClazz;
 
 
 
@@ -67,6 +69,10 @@ public class Live2Controller {
 	
 	@Autowired
 	private TspojoDao tspojoDao;
+	
+	@Autowired
+	private TvchannelpindaopojoDao tvchannelpindaopojoDao;
+	
 	
 	@Autowired
 	private VediocutpojoDao vediocutpojoDao;
@@ -270,7 +276,7 @@ http://211.148.171.93/vepl/livex/liveclip3?timelength=60&liveUrl=http%3A%2F%2F43
 		String title = request.getParameter("title") ;
 		String vediochannel = request.getParameter("vediochannel") ;
 		
-		System.out.println("vediotimestamp:"+vediotimestamp+"   -----     title:"+title);
+		System.out.println("in playm3u8():  vediotimestamp:"+vediotimestamp+"   -----     title:"+title+"    vediochannel："+vediochannel);
 		
 		String path = request.getContextPath();
 		String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -326,7 +332,7 @@ http://211.148.171.93/vepl/livex/liveclip3?timelength=60&liveUrl=http%3A%2F%2F43
 	public String 	productm3u8(Map<String, Object> model, HttpServletRequest request) {	 
 		String timestamp = request.getParameter("vediotimestamp") ;	
 		String vediochannel = request.getParameter("vediochannel") ;
-		
+		System.out.println("in  Live2Controller类  的  productm3u8() ： vediochannel="+vediochannel);
 		Long timestampl = Long.parseLong(timestamp.trim()) ; //精确到秒
 		
 		String path = request.getContextPath();
@@ -353,13 +359,17 @@ http://211.148.171.93/vepl/livex/liveclip3?timelength=60&liveUrl=http%3A%2F%2F43
 		Integer  tiemlengthi = Integer.parseInt(timelength);		
 		int tscount = tiemlengthi/ts_per_time;		 
 		tspojo_tstimesecond_start = tspojo_tstimesecond_end- tiemlengthi;	
-		System.out.println(tspojo_tstimesecond_start + "------------"+tspojo_tstimesecond_end);123
+		System.out.println("tspojo_tstimesecond_start:"+tspojo_tstimesecond_start + "------------tspojo_tstimesecond_end:"+tspojo_tstimesecond_end+"--------vediochannel:"+vediochannel);
+
 		/**
 		 * 增加   频道 pindaostr （数据库）和 vediochannel（入参 ） 的对应关系 
 		 * 将 vediochannel 对应为相应的 pindaostr串
+		 * 
+		 * 
 		 * */
-		String pindaoStr = "TJ2-800-node1";
-		List<Tspojo> tspojos= tspojoDao.findDistinctNameByTstimesecondBetweenOrderByIdAsc(tspojo_tstimesecond_start, tspojo_tstimesecond_end,pindaoStr);
+		String pindaoStr = ToolsClazz.GogetPindaoStr(vediochannel, tvchannelpindaopojoDao);// "TJ2-800-node1"; 默认的
+		
+		List<Tspojo> tspojos= tspojoDao.findDistinctNameByTstimesecondBetweenOrderByIdAsc(tspojo_tstimesecond_start, tspojo_tstimesecond_end,pindaoStr.trim());
 		Iterator<Tspojo> tspojosi = tspojos.iterator();
 		String pageReturnStr4 = "" ;		 
 		String pageReturnStr4_part2 = "" ;
@@ -459,6 +469,7 @@ http://127.0.0.1:8080/livex/liveclip2?liveUrl=http%3A%2F%2F43.224.208.195%2Flive
 
 		System.out.println("------------===============0000000"); //	
 		String timestamp = request.getParameter("timestamp") ;		
+		String vediochannel = request.getParameter("vediochannel") ;
 		Long timestampl = DataConvertTools.TimestampStringToTimestampLong(timestamp) ; //精确到秒
 		Integer iii=timestampl.intValue()/10;
 		iii=iii*10;
@@ -482,7 +493,15 @@ http://127.0.0.1:8080/livex/liveclip2?liveUrl=http%3A%2F%2F43.224.208.195%2Flive
 		int tscount = tiemlengthi/ts_per_time;		 
 		tspojo_tstimesecond_end = tspojo_tstimesecond_start+ tiemlengthi;	
 		System.out.println(tspojo_tstimesecond_start + "------------"+tspojo_tstimesecond_end);
-		List<Tspojo> tspojos= tspojoDao.findDistinctNameByTstimesecondBetweenOrderByIdAsc(tspojo_tstimesecond_start, tspojo_tstimesecond_end);
+		/**
+		 * 增加   频道 pindaostr （数据库）和 vediochannel（入参 ） 的对应关系 
+		 * 将 vediochannel 对应为相应的 pindaostr串
+		 * 
+		 * old
+		 * */
+		String pindaoStr = ToolsClazz.GogetPindaoStr(vediochannel, tvchannelpindaopojoDao);// "TJ2-800-node1"; 默认的
+		//String pindaoStr = "TJ2-800-node1";
+		List<Tspojo> tspojos= tspojoDao.findDistinctNameByTstimesecondBetweenOrderByIdAsc(tspojo_tstimesecond_start, tspojo_tstimesecond_end,pindaoStr);
 		Iterator<Tspojo> tspojosi = tspojos.iterator();
 		String pageReturnStr = "" ;
 		String pageReturnStr_part1 = "" ;
@@ -643,5 +662,9 @@ http://127.0.0.1:8080/livex/liveclip2?liveUrl=http%3A%2F%2F43.224.208.195%2Flive
 		model.put("pageReturnStr", pageReturnStr3);
 		return "test1vs";
 	}
+	
+	
+	
+	
 
 }

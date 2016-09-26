@@ -37,7 +37,7 @@ public interface TspojoDao extends CrudRepository<Tspojo, Long>{
 	  //@Query("select  t from Tspojo t left join   "
 	  //	  		+ " (select max(tspojo.id) as id, tspojo.name as name from Tspojo tspojo where tspojo.tstimesecond between ?1 and ?2 group by tspojo.name  order by id )  "
 	  //	  		+ " B on t.id = B.id   order by t.id")
-	  123 看看查询语句是否可用
+	  
 	  @Query("select  t from Tspojo t where t.id in "
   		+ " (select max(tspojo.id) as id from Tspojo tspojo where   tspojo.tstimesecond between ?1 and ?2 and tspojo.pindaostr=?3  group by tspojo.name )  "
   		+ " order by t.id")   //可去重，去除表中重复Tspojo的记录（以name做唯一性判断） 
