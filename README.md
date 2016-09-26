@@ -93,5 +93,14 @@ Caused by: java.lang.LinkageError: loader constraint violation: when resolving m
 ---------------------------------
 ###版本0.12.2
  	socket2.html 前后端通信 
+ 	
+###版本0.13
+	在tvchannelpindaopojo 中增加对应关系 ，可以进行频道的配置。
+	SQL 语句：
+	---- INSERT INTO tvchannelpindaopojo(
+            id, pindaostr, vediochannel)
+         VALUES (1, 'TJ2-800-node1', 'live_live2_TJ2_800');
+
+	
    
 --EOF--
