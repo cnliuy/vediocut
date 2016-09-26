@@ -24,7 +24,7 @@ import com.cc.entity.Tspojo;
 import com.cc.tool.download.MutilDownTools;
 import com.google.common.collect.Lists;
 
-
+@Deprecated
 /**
  * 下载m3u8文件 
  * 将其内容拆条存入数据库 不保存ts的文件
