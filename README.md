@@ -95,7 +95,7 @@ Caused by: java.lang.LinkageError: loader constraint violation: when resolving m
  	socket2.html 前后端通信 
  	
 ###版本0.13
-	在tvchannelpindaopojo 中增加对应关系 ，可以进行频道的配置。
+	在tvchannelpindaopojo 中增加对应关系 ，可以进行频道的配置。注: 该表不可以有重复项
 	SQL 语句：
 	---- INSERT INTO tvchannelpindaopojo(
             id, pindaostr, vediochannel)
