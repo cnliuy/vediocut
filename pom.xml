@@ -105,7 +105,7 @@
 			<artifactId>jstl</artifactId>
 		</dependency>
 		
-		<!-- web socket  -->
+		<!-- web socket s  -->
 		<dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-websocket</artifactId>
@@ -114,8 +114,21 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-messaging</artifactId>
         </dependency>
+		<!-- web socket e  -->
 		
 		
+		 
+		<!-- http://www.cnblogs.com/bianzy/p/5822426.html  spring boot Websocket（使用笔记） -->
+		<!-- web socket 原生 h5 s -->
+		<!--
+		<dependency>
+      		<groupId>javax</groupId>
+			<artifactId>javaee-api</artifactId>
+			<version>7.0</version>
+			<scope>provided</scope>
+		</dependency> 
+		-->
+		<!-- web socket 原生 h5 e -->
 		
 		<!-- 添加 httpclient  -->
 		<dependency>
